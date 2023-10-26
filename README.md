@@ -11,4 +11,4 @@ TODO:
 - [ ] Celda
 - [ ] Mina
 - [ ] Espía
-- [ x ] Jugador _(Falta `usarCarta()`)_
+- [x] Jugador _(Falta `usarCarta()`)_
