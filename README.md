@@ -5,7 +5,7 @@
 ### Links útiles
 [TDAs del proyecto](https://docs.google.com/spreadsheets/d/1WM1aMlVrjrqaJv0UZHGZS3XKjw1ebgOuu6abOpbQMr4/edit?usp=sharing)
 
-[Trello del proyecto](https://trello.com/b/tWggopiR/algoritmos-y-programacion-ii-tp-2) del proyecto
+[Trello del proyecto](https://trello.com/b/tWggopiR/algoritmos-y-programacion-ii-tp-2)
 
 TODO:
 
