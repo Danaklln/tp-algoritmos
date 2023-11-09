@@ -26,6 +26,11 @@ public:
     Jugador(unsigned int id)
     {
         this->id = id;
+        this->tesorosPropios = new Lista<Tesoro*>();
+        this->CantidadCartasSacadas = 0;
+        this->tesorosVigentes = 0;
+        this->cartasEnMano = new Lista<Carta*>();
+        this->estado = ACTIVO;
     }
 
     /*
@@ -95,18 +100,7 @@ public:
     */
     ~Jugador()
     {
-        this->tesorosPropios->iniciarCursor();
-        while(this->tesorosPropios->avanzarCursor())
-        {
-            delete this->tesorosPropios->obtenerCursor();
-        }
         delete this->tesorosPropios;
-
-        this->cartasEnMano->iniciarCursor();
-        while (this->cartasEnMano->avanzarCursor())
-        {
-            delete this->cartasEnMano->obtenerCursor();
-        }
         delete this->cartasEnMano;
     }
 };
