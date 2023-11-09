@@ -18,10 +18,11 @@ TODO:
 - [ ] Espía
 - [x] Jugador _(Falta `usarCarta()`)_
 
-Cartas Disponibles:
-1-Blindaje
-2-Radar
-3-Partir Tesoro
-4-Romper Blindaje: Desactiva el blindaje de un tesoro, y en el próximo lo puede capturar. 
-5-Tesoro en peligro
-6-Triple Mina
+### Cartas
+- [ ] Blindaje
+- [ ] Radar
+- [ ] Partir Tesoro
+- [ ] Romper Blindaje
+- [ ] Tesoro en peligro
+- [ ] Triple Mina
+
