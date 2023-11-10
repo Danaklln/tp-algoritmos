@@ -17,9 +17,9 @@ public:
 	 * Pre: -
 	 * Post: Inicializa Tesoro indicando el jugador propietario del mismo y las coordenadas del Tesoro
 	 */
-    Tesoro(Jugador*, unsigned int x, unsigned int y, unsigned int z)
+    Tesoro(Jugador* jugador, unsigned int x, unsigned int y, unsigned int z)
     {
-        this-> propietario = new Jugador*;
+        this-> propietario = new Jugador;
         this-> coordenadaCeldaContenedoraX = x;
         this-> coordenadaCeldaContenedoraY = y;
         this-> coordenadaCeldaContenedoraZ = z;
@@ -71,4 +71,4 @@ public:
 };
 
 
-#endif TESORO_H_
+#endif /* TESORO_H_ */
