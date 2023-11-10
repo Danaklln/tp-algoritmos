@@ -6,11 +6,11 @@
 #include "Tesoro.h"
 */
 
-enum EstadoCelda
-{
+
+enum EstadoCelda{
 	INACTIVO,
 	ACTIVO,
-	BLINDADA,
+	BLINDADA
 };
 
 
