@@ -11,20 +11,6 @@
 
 using namespace std;
 
-tError Interfaz::setArchivosSalida(char * archJugador1, char * archJugador2){
-
-	this->archJugador1.open(archJugador1, ofstream::out | ofstream::trunc);
-	if(this->archJugador1.fail()){
-		return ERROR_ARCHIVO;
-	}
-
-	this->archJugador2.open(archJugador2, ofstream::out | ofstream::trunc);
-	if(this->archJugador2.fail()){
-		return ERROR_ARCHIVO;
-	}
-
-	return OK;
-}
 
 bool Interfaz::msjBienvenida(){
 
@@ -49,53 +35,6 @@ bool Interfaz::msjBienvenida(){
 
 }
 
-void Interfaz::msjError(tError error){
-
-	switch(error){
-		case OK:
-			break;
-		case ERROR_JUGADOR_1_NULL:
-			cout << MSJ_ERROR_JUGADOR_1_NULL << endl;
-			break;
-		case ERROR_JUGADOR_2_NULL:
-			cout << MSJ_ERROR_JUGADOR_2_NULL << endl;
-			break;
-		case ERROR_JUGADOR_NULL:
-			cout << MSJ_ERROR_JUGADOR_NULL << endl;
-			break;
-		case ERROR_ARCHIVO:
-			cout << MSJ_ERROR_ARCHIVO << endl;
-			break;
-		case ERROR_POSICION_INVALIDA:
-			cout << MSJ_ERROR_POSICION_INVALIDA << endl;
-			break;
-		case ERROR_CASILLA_INACTIVA:
-			cout << MSJ_ERROR_CASILLA_INACTIVA << endl;
-			break;
-		case ERROR_CASILLA_INVALIDA:
-			cout << MSJ_ERROR_CASILLA_INVALIDA << endl;
-			break;
-		case ERROR_TESORO_INVALIDO:
-			cout << MSJ_ERROR_TESORO_INVALIDO << endl;
-			break;
-		case ERROR_HAY_TESORO:
-			cout << MSJ_ERROR_HAY_TESORO << endl;
-			break;
-		case ERROR_HAY_ESPIA:
-			cout << MSJ_ERROR_HAY_ESPIA << endl;
-			break;
-		case ERROR_DIRECCION_INVALIDA:
-			cout << MSJ_ERROR_DIRECCION_INVALIDA << endl;
-			break;
-		case ERROR_DESCONOCIDO:
-			cout << MSJ_ERROR_DESCONOCIDO << endl;
-			break;
-		default:
-			cout << MSJ_ERROR_DESCONOCIDO << endl;
-			break;
-	}
-
-}
 
 void Interfaz::msjSalida(){
 
@@ -117,10 +56,22 @@ void Interfaz::msjTurno(int jugador){
 		 << SEPARADOR_TURNOS << endl << endl;
 }
 
-void Interfaz::pedirPosicionEspia(unsigned int * fila, unsigned int * col){
+void Interfaz::pedirPosicionEspia(unsigned int * x, unsigned int * y, unsigned int * z){
 
 	cout << MSJ_PEDIR_POS_ESPIA << endl;
-	cin >> *fila >> *col;
+	cin >> *x >> *y >> *z;
+}
+
+void Interfaz::pedirPosicionMina(unsigned int * x, unsigned int * y, unsigned int * z){
+
+	cout << MSJ_PEDIR_POS_MINA << endl;
+	cin >> *x >> *y >> *z;
+}
+
+void Interfaz::pedirPosicionTesoro(unsigned int * x, unsigned int * y, unsigned int * z){
+
+	cout << MSJ_PEDIR_POS_TESORO << endl;
+	cin >> *x >> *y >> *z;
 }
 
 void Interfaz::msjResultado(tResultado resultado){
@@ -144,9 +95,34 @@ void Interfaz::msjResultado(tResultado resultado){
 		case TESORO_RIVAL_ENCONTRADO:
 			cout << MSJ_COLISION_DE_TESOROS << endl;
 			break;
+		case TESORO_RIVAL_BLINDADO:
+			cout << "Se encontro un tesoro blindado del oponenete!" << endl;
+			break;
+		case RADAR_ENCONTRO_TESORO:
+			cout << "El radar ha encontrado un tesoro enemigo!" << endl;
+			break;
+		case BLINDAJE_ENEMIGO_ROTO:
+			cout << "Has roto el blindaje de un tesoro enemigo!" << endl;
+			break;
+		case BLINDAJE_PROPIO_ROTO:
+			cout << "El enemigo ha roto el blindaje de uno de tus tesoros!" << endl;
+			break;
+		case MINA_DESCUBIERTA:
+			cout << "Has descubierto una mina enemiga, pierdes el turno!" << endl;
+			break;
+		case MINA_ACIERTO:
+			cout << "La mina destruyo un tesoro!" << endl;
+			break;
+		case MINA_FALLO:
+			cout << "La mina no encontro ningun tesoro" << endl;
+			break;
 		default:
 			break;
 	}
+}
+
+void Interfaz::msjYaHayTesoro(){
+	cout << "Ya hay un tesoro en la casilla que seleccionaste." << endl;
 }
 
 void Interfaz::msjGanador(int id){
@@ -197,6 +173,117 @@ unsigned char Interfaz::pedirDireccion(){
 	cin >> direccion;
 	return( (unsigned char) direccion );
 }
+
+
+unsigned int Interfaz::pedirElegirCarta(Lista<tCarta> * cartas){
+	tCarta cartaElegida;
+	int cartaAux;
+	unsigned int posicion = 0;
+	while(posicion == 0){
+		cout << "Estas son las cartas de tu mano:" << endl;
+
+		unsigned int blindaje = 0, radar = 0, partirTesoro = 0, romperBlindaje = 0, tesoroEnPeligro = 0, tripleMina = 0;
+		cartas->iniciarCursor();
+		while(cartas->avanzarCursor()){
+			switch(cartas->obtenerCursor()){
+			case BLINDAJE:
+				blindaje++;
+				break;
+			case RADAR:
+				radar++;
+				break;
+			case PARTIR_TESORO:
+				partirTesoro++;
+				break;
+			case ROMPER_BLINDAJE:
+				romperBlindaje++;
+				break;
+			case TESORO_EN_PELIGRO:
+				tesoroEnPeligro++;
+				break;
+			case TRIPLE_MINA:
+				tripleMina++;
+				break;
+			default:
+				break;
+			}
+		}
+
+		cout << "1-BLINDAJE x" << blindaje << endl
+			<< "2-RADAR x" << radar << endl
+			<< "3-PARTIR TESORO x" << partirTesoro << endl
+			<< "4-ROMPER BLINDAJE x" << romperBlindaje << endl
+			<< "5-TESORO EN PELIGRO x" << tesoroEnPeligro << endl
+			<< "6-TRIPLE MINA x" << tripleMina << endl;
+
+		cout << "Elige que carta quieres jugar:" << endl;
+		cin >> cartaAux;
+		cartaElegida = (tCarta) cartaAux;
+
+		unsigned int indice = 1;
+		cartas->iniciarCursor();
+		while (cartas->avanzarCursor() && posicion == 0){
+			if (cartas->obtenerCursor() == cartaElegida){
+				posicion = indice;
+			}
+			indice++;
+		}
+		if(posicion == 0){
+			cout << "No puedes usar la carta que seleccionaste." << endl;
+		}
+
+	}
+	return posicion;
+}
+
+tOpcion Interfaz::preguntarJugarCarta(){
+	int opcionAux;
+	tOpcion opcion;
+
+	cout << "¿Desea jugar una carta? 1=Sì, 2=No" << endl;
+	while(true){
+		cin >> opcionAux;
+		opcion = (tOpcion) opcionAux;
+		switch (opcion){
+			case SI:
+				return opcion;
+			case NO:
+				return opcion;
+			default:
+				continue;
+		}
+	}
+
+	return opcion; //sólo para evitar warning del compilador ;)
+}
+
+void Interfaz::pedirDimensiones(unsigned int * x, unsigned int * y, unsigned int * z){
+
+	cout << "Indique las dimensiones del tablero con las que quiere jugar:" << endl;
+
+	cout << "Ancho: ";
+	cin >> *x;
+
+	cout << "Alto: ";
+	cin >> *y;
+
+	cout << "Profundidad: ";
+	cin >> *z;
+
+}
+
+unsigned int Interfaz::pedirCantidadJugadores(){
+	unsigned int cantidad;
+
+	cout << "Indique la cantidad de jugadores: ";
+	cin >> cantidad;
+
+	return cantidad;
+}
+
+
+
+
 
 Interfaz::~Interfaz(){
 

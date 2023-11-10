@@ -15,6 +15,7 @@
 #include <fstream>
 
 #include "codigosError.h"
+#include "Lista.h"
 
 #define SEPARADOR_TURNOS "******************************************************"
 
@@ -26,7 +27,9 @@
 #define MSJ_INICIA_JUEGO           "Inicia el juego:"
 #define MSJ_TESOROS_COLOCADOS      "Se colocaron los tesoros para ambos jugadores"
 #define MSJ_TURNO                  "Es el turno del jugador "
-#define MSJ_PEDIR_POS_ESPIA        "Ingrese fila y columna para colocar espía, separados por espacio:"
+#define MSJ_PEDIR_POS_ESPIA        "Ingrese las coordenadas X, Y y Z para colocar un espía, separados por espacio:"
+#define MSJ_PEDIR_POS_MINA         "Ingrese las coordenadas X, Y y Z para colocar una mina, separados por espacio:"
+#define MSJ_PEDIR_POS_TESORO       "Ingrese las coordenadas X, Y y Z para colocar un tesoro, separados por espacio:"
 #define MSJ_EMPATE                 "Se ha producido un empate!!"
 #define MSJ_PREGUNTA_MOVER_TESORO  "¿Desea mover un tesoro? 1=Sì, 2=No"
 #define MSJ_PEDIR_ID_TESORO        "Ingrese número de tesoro a mover:"
@@ -63,23 +66,58 @@ typedef enum{ SI = 1,
 }
 tOpcion;
 
+typedef enum{
+	ESPIA_COLOCADO=1,
+	TESORO_COLOCADO=2,
+	PIERDE_TESORO=3,
+	CAPTURA_TESORO=4,
+	COLISION_DE_ESPIAS=5,
+	TESORO_RIVAL_ENCONTRADO=6,
+	TESORO_RIVAL_BLINDADO=7,
+	RADAR_ENCONTRO_TESORO=8,
+	BLINDAJE_ENEMIGO_ROTO=9,
+	BLINDAJE_PROPIO_ROTO=10,
+	MINA_DESCUBIERTA=11,
+	MINA_ACIERTO=12,
+	MINA_FALLO=13
+}tResultado;
+
+typedef enum{
+	BLINDAJE=1,
+	RADAR=2,
+	PARTIR_TESORO=3,
+	ROMPER_BLINDAJE=4,
+	TESORO_EN_PELIGRO=5,
+	TRIPLE_MINA=6
+}tCarta;
+
+
 class Interfaz{
 
 	public:
 	    std::ofstream archJugador1, archJugador2;
-		tError setArchivosSalida(char *, char *);
 		bool msjBienvenida( );
-		void msjError(tError);
 		void msjResultado(tResultado);
 		void msjSalida();
 		void msjTesorosColocados();
 		void msjTurno(int);
 		void msjGanador(int);
 		void msjEmpate();
-		void pedirPosicionEspia(unsigned int *, unsigned int *);
+		void Interfaz::msjYaHayTesoro();
+
+		void pedirDimensiones(unsigned int *, unsigned int *, unsigned int *);
+		unsigned int pedirCantidadJugadores();
+
+		void pedirPosicionEspia(unsigned int *, unsigned int *, unsigned int *);
+		void pedirPosicionMina(unsigned int *, unsigned int *, unsigned int *);
+		void pedirPosicionTesoro(unsigned int *, unsigned int *, unsigned int *);
 		tOpcion preguntarMoverTesoro();
+		tOpcion Interfaz::preguntarJugarCarta();
 		unsigned int pedirIdTesoro();
 		unsigned char pedirDireccion();
+
+		unsigned int pedirElegirCarta(Lista<tCarta> *);
+
 		~Interfaz();
 };
 
