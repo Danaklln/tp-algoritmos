@@ -2,16 +2,6 @@
 #include<stdlib.h>
 #include<time.h>
 
-struct TipoCarta{
-    int blindaje = 1;
-    int radar = 2;           //no es necesario el struct
-    int partirTesoro = 3;
-    int romperBlindaje = 4;
-    int tesoroEnPeligro = 5;
-    int tripleMina = 6;
-
-};
-
 void insertarCarta(int cartaSeleccionada){
     switch (cartaSeleccionada){
         case 1 :
@@ -40,12 +30,14 @@ void insertarCarta(int cartaSeleccionada){
     }
 }
 
-int sacarCarta(){
-    int cartaSeleccionada;
+char sacarCarta(){
+    char cartaSeleccionada;
+    int numeroDeCarta;
     int limiteInferior = 1;  //luego de sacar hay que agregarla a cantidadCartasSacadas y cartasEnMano
     int limiteSuperior = 6;                                       
     srand(time(NULL));
-    cartaSeleccionada = limiteInferior + rand()%(limiteSuperior +1 - limiteInferior);
+    numeroDeCarta = limiteInferior + rand()%(limiteSuperior +1 - limiteInferior);
+    cartaSeleccionada = char(numeroDeCarta + 64);
     return cartaSeleccionada;
 
 }
@@ -98,4 +90,51 @@ En este método simplemente pondría " cantidadCartasSacadas ++ "
         this->cantidadCartasSacadas = nuevaCantidad;
     }
 
-Crear para la clase jugador un setCartasEnMano para agregar las cartas nuevas a la lista
+Crear para la clase jugador un setCartasEnMano para agregar las cartas nuevas a la lista*/
+
+void menu(){
+    int opcion;
+    opcion = mostrarOpciones();
+    switch (opcion) {             //va en juego, le pregunta al jugador que quiere hacer y ejecuta la funcion correspondiente
+        case 1:
+            cartaDelMazo();
+            break;
+        case 2:
+            tesoroMina();
+            break;
+    }
+}
+
+int mostrarOpciones(){
+    int opt;
+    std::cout<<"\n¿Qué desea hacer en este turno?\n";
+    std::cout<<"1- Sacar una carta del mazo\n2- Poner Tesoro-mina"<<std::endl;
+    std::cin>>opt;
+    return opt;
+}
+
+void cartaDelMazo(){
+    char cartaSeleccionada,respuesta;
+    cartaSeleccionada = sacarCarta();
+    mostrarCartaSacada(cartaSeleccionada);                 //esta sería la función que va en el juego
+    std::cout<<'¿Deseas usar la carta?(s/n)'<<std::endl;
+    std::cin>>respuesta;
+    if(respuesta == 's'){
+        std::cout<<'insertando carta...'<<std::endl;
+        insertarCarta(cartaSeleccionada);
+    }
+    else{
+        std::cout<<'guardando carta...'<<std::endl;
+        guardarCarta(cartaSeleccionada);
+    }
+}
+void mostrarCartaSacada(char carta){
+    std::string A{"BLINDAJE"};
+    std::string B{"RADAR"}; 
+    std::string C{"PARTIR TESORO"};
+    std::string D{"ROMPER BLINDAJE"};
+    std::string E{"TESORO EN PELIGRO"};
+    std::string F{"TRIPLE MINA"};
+    std::cout<<'Has elegido sacar una carta'<<std::endl;
+    std::cout<<'Te ha tocado la carta '<< carta << std::endl;
+}
