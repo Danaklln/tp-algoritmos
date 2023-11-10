@@ -37,7 +37,7 @@ const struct {
     unsigned int B = 255;
 } COLOR_ESPIA;
 
-const struct { // Azul... medio raro
+const struct {
     unsigned int R = 255;
     unsigned int G = 0;
     unsigned int B = 0;
