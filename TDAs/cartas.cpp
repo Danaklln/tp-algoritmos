@@ -116,7 +116,7 @@ int mostrarOpciones(){
 void cartaDelMazo(){
     char cartaSeleccionada,respuesta;
     cartaSeleccionada = sacarCarta();
-    mostrarCartaSacada(cartaSeleccionada);                 //esta sería la función que va en el juego
+    mostrarCartaSacada(cartaSeleccionada);                 
     std::cout<<'¿Deseas usar la carta?(s/n)'<<std::endl;
     std::cin>>respuesta;
     if(respuesta == 's'){
