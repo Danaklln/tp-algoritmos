@@ -169,7 +169,10 @@ class Celda {
 			delete Tesoros;
 			*/
 		}
-
-		
 };
+
+int main(){
+	return 0;
+}
+
 
