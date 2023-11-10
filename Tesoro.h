@@ -64,10 +64,7 @@ public:
 	 * Pre: -
 	 * Post: Elimina el Tesoro
 	 */
-    ~Tesoro()
-    {
-        delete propietario;
-    };
+    ~Tesoro();
 };
 
 
