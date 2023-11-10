@@ -1,11 +1,5 @@
-#include <iostream>
-#include "Lista.h"
-/*
-#include "Espia.h"
-#include "Mina.h"
-#include "Tesoro.h"
-*/
-
+#ifndef CELDA_H_
+#define CELDA_H_
 
 enum EstadoCelda{
 	INACTIVO,
@@ -23,9 +17,9 @@ class Celda {
     private:
 
         EstadoCelda estado;
-		//Espia* espia;
-		//Mina* mina;
-		//Lista<Tesoro*>* Tesoros;
+		Espia* espia;
+		Mina* mina;
+		Lista<Tesoro*>* tesoros;
 		unsigned int turnosInactivosRestantes;
 		unsigned int turnosBlindajeRestante;
 		unsigned int coordenadaX; //no serian necesarias las dejamos por si acaso
@@ -45,9 +39,9 @@ class Celda {
 			this->estado = ACTIVO;
 			this->turnosInactivosRestantes = 0;
 			this->turnosBlindajeRestante = 0;
-			//this->Tesoros = new Lista<Tesoro*>;
-			//this->Espia = NULL;
-			//this->Mina = NULL;
+			this->tesoros = new Lista<Tesoro*>;
+			this->espia = NULL;
+			this->mina = NULL;
 		}
 
 		/*
@@ -104,28 +98,25 @@ class Celda {
 		* Pre: -
 		* Post: Devuelve puntero al unico espía de la celda.
 		*/
-		/*
 		Espia* obtenerEspia(){
-			return this->Espia; 
-		}*/
+			return this->espia; 
+		}
 
 		/*
 		* Pre: -
 		* Post: Devuelve puntero a la unica mina de la celda.
 		*/
-		/*
 		Mina* obtenerMina(){
-			return this->Mina; 
-		}*/
+			return this->mina; 
+		}
 
 		/*
 		* Pre: -
 		* Post: Devuelve puntero a la unica mina de la celda.
 		*/
-		/*
 		Lista<Tesoro*>* obtenerTesoros(){
-			return this->Tesoros; 
-		}*/
+			return this->tesoros; 
+		}
 
 		/*
 		* Pre: -
@@ -158,21 +149,18 @@ class Celda {
 		* Post: Libera datos dinamicos de la celda
 		*/
 		~Celda(){
-			/*
 			delete espia;
 			delete mina;
-			Lista<Tesoro*>* ptrlistptrtesoro = this->Tesoros;
-			ptrlistptrtesoro->iniciarCursor()
-			while (ptrlistptrtesoro->avanzarCursor()){
+			Lista<Tesoro*>* ptrlistptrtesoro = this->tesoros;
+			ptrlistptrtesoro->iniciarCursor();
+			while(ptrlistptrtesoro->avanzarCursor()){
 				delete ptrlistptrtesoro->obtenerCursor();
 			}
-			delete Tesoros;
-			*/
+			delete tesoros;
 		}
 };
 
-int main(){
-	return 0;
-}
+
+#endif /* CELDA_H_ */
 
 
