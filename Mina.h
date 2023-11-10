@@ -30,8 +30,7 @@ public:
 	 * Pre: -
 	 * Post: Elimina Mina
 	 */
-    ~Mina();
 };
 
 
-#endif MINA_H_
+#endif /* MINA_H_ */
