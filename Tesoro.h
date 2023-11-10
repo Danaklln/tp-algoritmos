@@ -19,7 +19,7 @@ public:
 	 */
     Tesoro(Jugador* jugador, unsigned int x, unsigned int y, unsigned int z)
     {
-        this-> propietario = new Jugador;
+        this-> propietario = jugador;
         this-> coordenadaCeldaContenedoraX = x;
         this-> coordenadaCeldaContenedoraY = y;
         this-> coordenadaCeldaContenedoraZ = z;
@@ -31,7 +31,7 @@ public:
 	 */
     Jugador* getPropietario()
     {
-        this-> propietario;
+        return this-> propietario;
     }
 
 	/*
@@ -40,7 +40,7 @@ public:
 	 */
     unsigned int getCeldaContenedoraX()
     {
-        this->coordenadaCeldaContenedoraX;
+        return this->coordenadaCeldaContenedoraX;
     }
 
 	/*
@@ -49,7 +49,7 @@ public:
 	 */
     unsigned int getCeldaContenedoraY()
     {
-        this->coordenadaCeldaContenedoraY;
+        return this->coordenadaCeldaContenedoraY;
     }
 
     /*
@@ -58,7 +58,7 @@ public:
 	 */
     unsigned int getCeldaContenedoraZ()
     {
-        this->coordenadaCeldaContenedoraZ;
+        return this->coordenadaCeldaContenedoraZ;
     }
 	/*
 	 * Pre: -
@@ -72,3 +72,4 @@ public:
 
 
 #endif /* TESORO_H_ */
+
