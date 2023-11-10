@@ -65,7 +65,6 @@ public:
 	 * Pre: -
 	 * Post: Elimina el Espia
 	 */
-    ~Espia();
 };
 
 
