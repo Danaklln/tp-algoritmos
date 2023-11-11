@@ -1,13 +1,16 @@
 #ifndef CELDA_H_
 #define CELDA_H_
 
+#include "Espia.h"
+#include "Mina.h"
+#include "Tesoro.h"
+#include "../TDAs/Jugador.h"
+
 enum EstadoCelda{
 	INACTIVO,
 	ACTIVO,
 	BLINDADA
 };
-
-
 
 /*
 * Una Celda almacena objetos e información necesaria para el juego tesoro binario.

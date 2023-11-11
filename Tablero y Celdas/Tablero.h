@@ -1,7 +1,9 @@
 #ifndef TABLERO_H_
 #define TABLERO_H_
 
-using namespace std;
+#include <iostream>
+#include "../TDAs/Lista.h"
+#include "Celda.h"
 
 /*
 * Un Tablero almacena punteros a celdas de según las dimensiones dadas.
@@ -84,16 +86,16 @@ class Tablero {
 			ptrlistptrlistptrlistdeptrcelda->iniciarCursor();
 			unsigned int k = 1;
 			while (ptrlistptrlistptrlistdeptrcelda->avanzarCursor()){
-				cout << "TableroXY | Z = " << k << ":" <<endl;
+                std::cout << "TableroXY | Z = " << k << ":" <<endl;
 				Lista<Lista<Celda*>*>* ptrlistptrlistdeptrcelda = ptrlistptrlistptrlistdeptrcelda->obtenerCursor();
 				ptrlistptrlistdeptrcelda->iniciarCursor();
 				while (ptrlistptrlistdeptrcelda->avanzarCursor()){
 					Lista<Celda*>* ptrlistdeptrcelda = ptrlistptrlistdeptrcelda->obtenerCursor();
 					ptrlistdeptrcelda->iniciarCursor();
 					while (ptrlistdeptrcelda->avanzarCursor()){
-						cout <<  ptrlistdeptrcelda->obtenerCursor()->getCoordenadaX() << ptrlistdeptrcelda->obtenerCursor()->getCoordenadaY() << " ";
+                        std::cout <<  ptrlistdeptrcelda->obtenerCursor()->getCoordenadaX() << ptrlistdeptrcelda->obtenerCursor()->getCoordenadaY() << " ";
 					}
-					cout << endl;
+                    std::cout << endl;
 				}
 				k++;
 			}
