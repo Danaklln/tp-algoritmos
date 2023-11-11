@@ -23,7 +23,7 @@ TesoroBinario::TesoroBinario(unsigned int cantidadJugadores,
 	this->jugadores         = new Jugador *[cantidadJugadores];
 	this->cantidadJugadores = cantidadJugadores;
 
-    //se inician los jugadores con sus IDs
+    //se inician los jugadores con sus ID
 	for(int i = 0; i<cantidadJugadores; i++){
 		this->jugadores[i] = Jugador(i+1);
 	}
