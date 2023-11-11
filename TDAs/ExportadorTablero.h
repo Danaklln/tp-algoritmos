@@ -50,7 +50,7 @@ public:
    * Pre: -
    * Post: Crea una instancia de TableroPrinter
    */
-  ExportadorTablero(Tablero &tablero);
+  ExportadorTablero(const Tablero &tablero);
 
   /*
    * Pre: Se debe proporcionar un tablero válido y un piso > 0

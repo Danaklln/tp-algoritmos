@@ -3,15 +3,15 @@
 #include "bitmapConfig.h"
 #include "bitmap_image.hpp"
 
-ExportadorTablero::ExportadorTablero(const Tablero& tablero)
+ExportadorTablero::ExportadorTablero(Tablero* tablero)
 {
     if (!tablero)
     {
         throw "[ERROR] No se procorcionó un tablero";
     }
 
-    uint tableroX =  tablero->getX(),
-         tableroY = tableroY->getY();
+    uint tableroX =  tablero->getDimensionX(),
+         tableroY = tablero->getDimensionY();
 
     this->imageW = tableroX * (TABLERO_TAMANIO_CUADRADO + 2);
     this->imageH = tableroY * (TABLERO_TAMANIO_CUADRADO + 2);
@@ -86,4 +86,10 @@ void ExportadorTablero::dibujarMina(bitmap_image& image, unsigned int x, unsigne
     draw.circle(x * (TABLERO_TAMANIO_CUADRADO + 2) - TABLERO_TAMANIO_CUADRADO / 2 - 1, // El -1 es por la forma que redondea c++
                 y * (TABLERO_TAMANIO_CUADRADO + 2) - TABLERO_TAMANIO_CUADRADO / 2 - 1, // "
                 (TABLERO_TAMANIO_CUADRADO + 2) / 2);
+}
+
+
+void ExportadorTablero::exportarPisoTablero(Tablero &tablero, uint piso)
+{
+    // TODO: Implementar
 }

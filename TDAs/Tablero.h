@@ -86,7 +86,7 @@ class Tablero {
 			ptrlistptrlistptrlistdeptrcelda->iniciarCursor();
 			unsigned int k = 1;
 			while (ptrlistptrlistptrlistdeptrcelda->avanzarCursor()){
-                std::cout << "TableroXY | Z = " << k << ":" <<endl;
+                std::cout << "TableroXY | Z = " << k << ":" << std::endl;
 				Lista<Lista<Celda*>*>* ptrlistptrlistdeptrcelda = ptrlistptrlistptrlistdeptrcelda->obtenerCursor();
 				ptrlistptrlistdeptrcelda->iniciarCursor();
 				while (ptrlistptrlistdeptrcelda->avanzarCursor()){
@@ -122,7 +122,6 @@ class Tablero {
 			delete ptrlistptrlistptrlistdeptrcelda;
 		}
 };
-
 
 #endif /* TABLERO_H_ */
 
