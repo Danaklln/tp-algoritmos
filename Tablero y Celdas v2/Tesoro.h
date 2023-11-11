@@ -7,7 +7,7 @@
 enum EstadoTesoro
 {
 	BLINDADO,
-  NO BLINDADO
+  	NOBLINDADO
 };
 
 class Tesoro
@@ -91,10 +91,6 @@ public:
 		this -> turnosBlindajeRestante = cantidadTurnosBlindaje;
 	}
 
-	/*
-	 * Pre: -
-	 * Post: Elimina el Tesoro
-	 */
 };
 
 
