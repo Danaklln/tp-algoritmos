@@ -1,7 +1,7 @@
 #ifndef TESORO_H_
 #define TESORO_H_
 
-#include "Jugador.h"
+#include "../TDAs/Jugador.h"
 
 class Tesoro
 {
