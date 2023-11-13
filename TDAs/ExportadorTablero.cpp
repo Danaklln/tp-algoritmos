@@ -88,6 +88,29 @@ void ExportadorTablero::dibujarMina(bitmap_image& image, unsigned int x, unsigne
                 (TABLERO_TAMANIO_CUADRADO + 2) / 2);
 }
 
+void dibujarCruz(bitmap_image& image, unsigned int x, unsigned int y)
+{
+    image_drawer draw(image);
+
+    draw.pen_color(COLOR_CASILLA_INACTIVA.R,
+                   COLOR_CASILLA_INACTIVA.G,
+                   COLOR_CASILLA_INACTIVA.B);
+    draw.pen_width(2);
+
+    draw.line_segment(
+        x * (TABLERO_TAMANIO_CUADRADO + 2),
+        (y) * (TABLERO_TAMANIO_CUADRADO + 2),
+        (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2),
+        (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2)
+    );
+
+    draw.line_segment(
+        (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2),
+        y * (TABLERO_TAMANIO_CUADRADO + 2),
+        x * (TABLERO_TAMANIO_CUADRADO + 2),
+        (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2)
+    );
+}
 
 void ExportadorTablero::exportarPisoTablero(Tablero &tablero, uint piso)
 {

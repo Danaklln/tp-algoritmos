@@ -43,4 +43,10 @@ const struct {
     unsigned int B = 0;
 } COLOR_MINA;
 
+const struct {
+    unsigned int R = 255;
+    unsigned int G = 255;
+    unsigned int B = 255;
+} COLOR_CASILLA_INACTIVA;
+
 #endif

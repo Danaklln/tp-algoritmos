@@ -12,8 +12,6 @@ enum EstadoCelda{
 	BLINDADA
 };
 
-
-
 /*
 * Una Celda almacena objetos e información necesaria para el juego tesoro binario.
 */
