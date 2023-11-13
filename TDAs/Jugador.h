@@ -1,3 +1,6 @@
+#ifndef JUGADOR_GUARD
+#define JUGADOR_GUARD
+
 #include "Lista.h"
 #include "Tesoro.h"
 
@@ -104,3 +107,5 @@ public:
         delete this->cartasEnMano;
     }
 };
+
+#endif // JUGADOR_GUARD

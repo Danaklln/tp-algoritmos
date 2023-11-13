@@ -1,7 +1,7 @@
 #ifndef TESORO_H_
 #define TESORO_H_
 
-#include "../TDAs/Jugador.h"
+#include "./Jugador.h"
 
 class Tesoro
 {
@@ -19,10 +19,10 @@ public:
 	 */
     Tesoro(Jugador* jugador, unsigned int x, unsigned int y, unsigned int z)
     {
-        this-> propietario = jugador;
-        this-> coordenadaCeldaContenedoraX = x;
-        this-> coordenadaCeldaContenedoraY = y;
-        this-> coordenadaCeldaContenedoraZ = z;
+        this->propietario = jugador;
+        this->coordenadaCeldaContenedoraX = x;
+        this->coordenadaCeldaContenedoraY = y;
+        this->coordenadaCeldaContenedoraZ = z;
     };
 
 	/*
@@ -31,7 +31,7 @@ public:
 	 */
     Jugador* getPropietario()
     {
-        return this-> propietario;
+        return this->propietario;
     }
 
 	/*
