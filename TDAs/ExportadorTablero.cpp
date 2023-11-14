@@ -83,8 +83,8 @@ void ExportadorTablero::dibujarMina(bitmap_image& image, unsigned int x, unsigne
     draw.pen_color(COLOR_MINA.R, COLOR_MINA.G, COLOR_MINA.B);
     
     draw.pen_width(2);
-    draw.circle(x * (TABLERO_TAMANIO_CUADRADO + 2) - TABLERO_TAMANIO_CUADRADO / 2 - 1, // El -1 es por la forma que redondea c++
-                y * (TABLERO_TAMANIO_CUADRADO + 2) - TABLERO_TAMANIO_CUADRADO / 2 - 1, // "
+    draw.circle((x + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - TABLERO_TAMANIO_CUADRADO / 2 - 1, // El -1 es por la forma que redondea c++
+                (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - TABLERO_TAMANIO_CUADRADO / 2 - 1, // "
                 (TABLERO_TAMANIO_CUADRADO + 2) / 2);
 }
 
