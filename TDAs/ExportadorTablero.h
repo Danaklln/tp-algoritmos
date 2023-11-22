@@ -2,6 +2,7 @@
 #define GUARD_EXPORTADOR_PRINTER
 
 #include "Tablero.h"
+#include "Jugador.h"
 #include "bitmap_image.hpp"
 #include "bitmapConfig.h"
 
@@ -11,6 +12,7 @@ class ExportadorTablero {
 private:
     uint tableroX;
     uint tableroY;
+    uint cantPisos;
     uint imageW;
     uint imageH;
 
@@ -61,11 +63,11 @@ public:
   ExportadorTablero(Tablero *tablero);
 
   /*
-   * Pre: Se debe proporcionar un tablero válido y un piso > 0
-   * Post: Se exporta el piso del tablero proporcionado a un archivo BMP nombrado
-   * segun el archivo de configuracion.
+   * Pre: Se debe proporcionar un tablero válido, un jugador valido y un piso > 0 < tableroZ
+   * Post: Se exporta el piso del tablero proporcionado en funcion de lo que veria el jugador
+   * pasado como parametro
    */
-  void exportarPisoTablero(Tablero &tablero, uint piso);
+  void exportarPisoTablero(Tablero *tablero, Jugador* jugador, uint piso);
 };
 
 #endif

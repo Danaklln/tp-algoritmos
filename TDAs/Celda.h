@@ -6,9 +6,9 @@
 #include "Espia.h"
 #include "Tesoro.h"
 
-enum EstadoCelda{
-	INACTIVO,
-	ACTIVO,
+enum EstadoCelda {
+	INACTIVA,
+	ACTIVA,
 	BLINDADA
 };
 

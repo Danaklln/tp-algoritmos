@@ -1,5 +1,6 @@
 #include "ExportadorTablero.h"
 #include "Tablero.h"
+#include "Celda.h"
 #include "bitmapConfig.h"
 #include "bitmap_image.hpp"
 
@@ -15,6 +16,7 @@ ExportadorTablero::ExportadorTablero(Tablero* tablero)
 
     this->imageW = tableroX * (TABLERO_TAMANIO_CUADRADO + 2);
     this->imageH = tableroY * (TABLERO_TAMANIO_CUADRADO + 2);
+    this->cantPisos = tablero->getDimensionZ();
 }
 
 void ExportadorTablero::dibujarTesoro(bitmap_image& image, unsigned int x, unsigned int y, bool esTesoroRival)
@@ -37,10 +39,9 @@ void ExportadorTablero::dibujarGrilla(bitmap_image& imagen)
 {
     if (!imagen) throw "[ERROR] No se proporcionó una imagen";
 
-    bitmap_image image(this->imageW + 1, this->imageH + 1); // Importante sumar uno para que se dibuje la linea final y no quede cortado.
     imagen.clear();
     imagen.set_all_channels(COLOR_CUADRADO.R, COLOR_CUADRADO.G, COLOR_CUADRADO.B);
-    image_drawer draw(image);
+    image_drawer draw(imagen);
     draw.pen_color(0, 0, 0);
     for (int i = 0; i <= this->imageH / (TABLERO_TAMANIO_CUADRADO + 2); i++)
     {
@@ -112,7 +113,27 @@ void dibujarCruz(bitmap_image& image, unsigned int x, unsigned int y)
     );
 }
 
-void ExportadorTablero::exportarPisoTablero(Tablero &tablero, uint piso)
+void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, uint piso)
 {
-    // TODO: Implementar
+    bitmap_image imagenAExportar(this->imageW + 1, this->imageH + 1);
+    dibujarGrilla(imagenAExportar);
+    Lista<Lista<Celda*>*>* pisoActual = tablero->obtenerNivel(piso);
+
+    pisoActual->iniciarCursor();
+    while(pisoActual->avanzarCursor())
+    {
+        Lista<Celda*>* pisoActualX = pisoActual->obtenerCursor();
+        pisoActualX->iniciarCursor();
+
+        while(pisoActualX->avanzarCursor())
+        {
+            Celda* celdaActual = pisoActualX->obtenerCursor();
+
+            if (celdaActual->getEstado() == INACTIVA)
+            {
+                this->dibujarCruz(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
+                continue;
+            }
+        }
+    }
 }
