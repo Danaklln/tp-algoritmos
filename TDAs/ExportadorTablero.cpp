@@ -10,7 +10,7 @@ ExportadorTablero::ExportadorTablero(Tablero* tablero)
         throw "[ERROR] No se procorcionó un tablero";
     }
 
-    uint tableroX =  tablero->getDimensionX(),
+    uint tableroX = tablero->getDimensionX(),
          tableroY = tablero->getDimensionY();
 
     this->imageW = tableroX * (TABLERO_TAMANIO_CUADRADO + 2);

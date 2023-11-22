@@ -1,7 +1,7 @@
 #ifndef ESPIA_H_
 #define ESPIA_H_
 
-#include "../TDAs/Jugador.h"
+#include "Jugador.h"
 #include "Tesoro.h"
 
 class Espia
