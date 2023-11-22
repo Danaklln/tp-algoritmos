@@ -1,9 +1,7 @@
 #ifndef TABLERO_H_
 #define TABLERO_H_
 
-#include <iostream>
-#include "../TDAs/Lista.h"
-#include "Celda.h"
+using namespace std;
 
 /*
 * Un Tablero almacena punteros a celdas de según las dimensiones dadas.
@@ -77,6 +75,22 @@ class Tablero {
 			return ptrlistdeptrcelda->obtener(posicionX);
 		}
 
+		/*
+		* Pre: -
+		* Post: Devuelve el contenido del Tablero. 
+		*/
+		Lista<Lista<Lista<Celda*>*>*>* getContenido(){
+			return this->ptrContenido;
+		}
+
+		/*
+		* Pre: Recibe un numero mayor a 1 en rango
+		* Post: Devuelve el nivel XY segun numero 
+		*/
+		Lista<Lista<Celda*>*>* obtenerNivel(unsigned int k){
+			return this->ptrContenido->obtener(k);
+		}
+
 		/* se usara bitmap esto es solo para probar
 		* Pre: -
 		* Post: Muestra contenido del Tablero por pantalla. 
@@ -86,16 +100,16 @@ class Tablero {
 			ptrlistptrlistptrlistdeptrcelda->iniciarCursor();
 			unsigned int k = 1;
 			while (ptrlistptrlistptrlistdeptrcelda->avanzarCursor()){
-                std::cout << "TableroXY | Z = " << k << ":" << std::endl;
+				cout << "TableroXY | Z = " << k << ":" <<endl;
 				Lista<Lista<Celda*>*>* ptrlistptrlistdeptrcelda = ptrlistptrlistptrlistdeptrcelda->obtenerCursor();
 				ptrlistptrlistdeptrcelda->iniciarCursor();
 				while (ptrlistptrlistdeptrcelda->avanzarCursor()){
 					Lista<Celda*>* ptrlistdeptrcelda = ptrlistptrlistdeptrcelda->obtenerCursor();
 					ptrlistdeptrcelda->iniciarCursor();
 					while (ptrlistdeptrcelda->avanzarCursor()){
-                        std::cout <<  ptrlistdeptrcelda->obtenerCursor()->getCoordenadaX() << ptrlistdeptrcelda->obtenerCursor()->getCoordenadaY() << " ";
+						cout <<  ptrlistdeptrcelda->obtenerCursor()->getCoordenadaX() << ptrlistdeptrcelda->obtenerCursor()->getCoordenadaY() << " ";
 					}
-                    std::cout << endl;
+					cout << endl;
 				}
 				k++;
 			}
@@ -122,6 +136,7 @@ class Tablero {
 			delete ptrlistptrlistptrlistdeptrcelda;
 		}
 };
+
 
 #endif /* TABLERO_H_ */
 
