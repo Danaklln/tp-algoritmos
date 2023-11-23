@@ -1,111 +1,71 @@
-#ifndef JUGADOR_GUARD
-#define JUGADOR_GUARD
+#ifndef JUGADOR_H_
+#define JUGADOR_H_
 
-#include "Lista.h"
-#include "Tesoro.h"
-
-enum EstadoJugador 
-{
-    ELIMINADO,
-    ACTIVO
+enum EstadoJugador {
+    JUGADORELIMINADO,
+    JUGADORACTIVO,
+	JUGADORPERDIOTURNO
 };
 
-class Jugador 
-{
-private:
-    unsigned int id;
-    unsigned short tesorosVigentes;
-    unsigned short CantidadCartasSacadas;
-    EstadoJugador estado;
-    Lista<Tesoro*>* tesorosPropios;
-    Lista<Carta*>* cartasEnMano;
+class Jugador{
 
-public:
-    /*
-     * Pre: -
-     * Post: Inicializa un jugador con el id proporcionado como
-     * parámetro
-    */
-    Jugador(unsigned int id)
-    {
-        this->id = id;
-        this->tesorosPropios = new Lista<Tesoro*>();
-        this->CantidadCartasSacadas = 0;
-        this->tesorosVigentes = 0;
-        this->cartasEnMano = new Lista<Carta*>();
-        this->estado = ACTIVO;
-    }
+    private:
+        unsigned int id;
+    	EstadoJugador estado;
 
-    /*
-     * Pre: -
-     * Post: Devuelve un entero positivo indicando el id del
-     * jugador
-    */
-    unsigned int getId()
-    {
-        return this->id;
-    }
+    public:
+		/*
+		* Pre: -
+		* Post: Inicializa un jugador con el id proporcionado como parámetro.
+		*/
+        Jugador(unsigned int id){
+			this->id = id;
+			this->estado = JUGADORACTIVO;
+		}
 
-    /*
-     * Pre: Debe proporcionarse un tesoro como parámetro
-     * Post: Agrega un tesoro al final de la lista tesorosPropios
-    */
-    void addTesoroPropio(Tesoro* tesoro)
-    {
-        if (!tesoro) throw "[ERROR] No se proporcionó un tesoro válido";
-        this->tesorosPropios->iniciarCursor();
-        this->tesorosPropios->agregar(tesoro);
-    }
+		/*
+		* Pre: -
+		* Post: Devuelve un entero positivo indicando el id del jugador.
+		*/
+		unsigned int getId(){
+			return this->id;
+		}
 
-    /*
-     * Pre: -
-     * Post: Devuelve la lista con los tesoros del jugador actual
-    */
-    Lista<Tesoro*>* getTesorosPropios()
-    {
-        return this->tesorosPropios;
-    }
+		/*
+		* Pre: -
+		* Post: Devuelve el estado del jugador.
+		*/
+		unsigned int getEstado(){
+			return this->estado;
+		}
 
-    /*
-     * Pre: -
-     * Post: Devuelve la cantidad de cartas que sacó del mazo
-     * el jugador
-    */
-    unsigned short getCantidadCartasSacadas()
-    {
-        return this->cantidadCartasSacadas;
-    }
+		/*
+		* Pre: -
+		* Post: Indica que jugador está eliminado del juego.
+		*/
+		void eliminarJugador(){
+			this->estado = JUGADORELIMINADO;
+		}
 
-    /*
-     * Pre: -
-     * Post: Cambia el valor de cantidadCartasSacadas por el
-     * proporcionado como parámetro
-    */
-    void setCantidadCartasSacadas(unsigned short nuevaCantidad)
-    {
-        this->cantidadCartasSacadas = nuevaCantidad;
-    }
+		/*
+		* Pre: -
+		* Post: Indica que jugador debe perder este turno.
+		*/
+		void perderTurno(){
+			this->estado = JUGADORPERDIOTURNO;
+		}
 
-    /*
-     * Pre: -
-     * Post: Devuelve un puntero a la lista de cartas en la
-     * mano del jugador
-    */
-    Lista<Carta*>* getCartasEnMano()
-    {
-        return this->cartasEnMano;
-    }
+		/*
+		* Pre: -
+		* Post: Reactiva jugador en caso de no estar eliminado.
+		*/
+		void reactivarJugador(){
+			if (this->estado != JUGADORELIMINADO){
+				this->estado = JUGADORACTIVO;
+			}
+		}
 
-    /*
-     * Pre: -
-     * Post: Destruye la instancia de Jugador, liberando la memoria
-     * utilizada
-    */
-    ~Jugador()
-    {
-        delete this->tesorosPropios;
-        delete this->cartasEnMano;
-    }
 };
 
-#endif // JUGADOR_GUARD
+
+#endif /* JUGADOR_H_ */

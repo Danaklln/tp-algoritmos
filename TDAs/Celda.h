@@ -1,16 +1,20 @@
 #ifndef CELDA_H_
 #define CELDA_H_
-
-#include "Mina.h"
+#include <iostream>
+#include <string>
 #include "Lista.h"
 #include "Espia.h"
+#include "Mina.h"
 #include "Tesoro.h"
 
-enum EstadoCelda {
-	INACTIVA,
-	ACTIVA,
-	BLINDADA
+using namespace std;
+
+enum EstadoCelda{
+	CELDAINACTIVA,
+	CELDAACTIVA
 };
+
+
 
 /*
 * Una Celda almacena objetos e información necesaria para el juego tesoro binario.
@@ -18,58 +22,31 @@ enum EstadoCelda {
 class Celda {
 
     private:
-
         EstadoCelda estado;
-		Espia* espia;
-		Mina* mina;
-		Lista<Tesoro*>* tesoros;
+		Espia* ptrEspia;
+		Mina* ptrMina;
+		Lista<Tesoro*>* ptrlistptrtesoro;
+		Jugador* ptrJugadorActual;
 		unsigned int turnosInactivosRestantes;
-		unsigned int turnosBlindajeRestante;
 		unsigned int coordenadaX; //no serian necesarias las dejamos por si acaso
 		unsigned int coordenadaY;
 		unsigned int coordenadaZ;
 
     public:
-
 		/*
 		* Pre: Coordenadas X Y Z son numeros mayor a cero.
-		* Post: Inicializa una celda con valores default.
+		* Post: Inicializa una celda con valores default y el jugador actual.
 		*/
-        Celda(unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
+        Celda(Jugador* ptrJugadorActual, unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
+			this->ptrJugadorActual = ptrJugadorActual;
 			this->coordenadaX = coordenadaX;
 			this->coordenadaY = coordenadaY;
 			this->coordenadaZ = coordenadaZ;
-			this->estado = ACTIVO;
+			this->estado = CELDAACTIVA;
 			this->turnosInactivosRestantes = 0;
-			this->tesoros = new Lista<Tesoro*>;
-			this->espia = NULL;
-			this->mina = NULL;
-		}
-
-		/*
-		* Pre: -
-		* Post: Devuelve la coordenada X de la celda.
-		*/
-		unsigned int getCoordenadaX(){
-			return this->coordenadaX;
-		}
-
-
-		/*
-		* Pre: -
-		* Post: Devuelve la coordenada Y de la celda.
-		*/
-		unsigned int getCoordenadaY(){
-			return this->coordenadaY;
-		}
-
-
-		/*
-		* Pre: -
-		* Post: Devuelve la coordenada Z de la celda.
-		*/
-		unsigned int getCoordenadaZ(){
-			return this->coordenadaZ;
+			this->ptrlistptrtesoro = new Lista<Tesoro*>;
+			this->ptrEspia = NULL;
+			this->ptrMina = NULL;
 		}
 
 		/*
@@ -82,19 +59,10 @@ class Celda {
 
 		/*
 		* Pre: -
-		* Post: Devuelve turnosInactivosRestantes de la celda.
-		*/
-		unsigned int getTurnosInactivosRestantes(){
-			return this->turnosInactivosRestantes;
-		}
-
-
-		/*
-		* Pre: -
 		* Post: Devuelve puntero al unico espía de la celda.
 		*/
 		Espia* obtenerEspia(){
-			return this->espia; 
+			return this->ptrEspia; 
 		}
 
 		/*
@@ -102,32 +70,162 @@ class Celda {
 		* Post: Devuelve puntero a la unica mina de la celda.
 		*/
 		Mina* obtenerMina(){
-			return 	this->mina; 
+			return 	this->ptrMina; 
 		}
 
 		/*
 		* Pre: -
-		* Post: Devuelve puntero a los tesoros.
+		* Post: Devuelve puntero a lista de punteros a tesoro.
 		*/
 		Lista<Tesoro*>* obtenerTesoros(){
-			return this->tesoros; 
+			return this->ptrlistptrtesoro; 
 		}
 
 		/*
 		* Pre: -
-		* Post: Modifica el estado de la celda
+		* Post: Devuelve puntero al 1er tesoro de jugador actual si no devuelve NULL.
 		*/
-		void setEstado(EstadoCelda nuevoEstado ){
-			this-> estado = nuevoEstado;
+		Tesoro* obtenerTesoroActual(){
+			Lista<Tesoro*>* ptrlistptrtesoro = this->ptrlistptrtesoro;
+			if (!ptrlistptrtesoro->estaVacia()){
+				ptrlistptrtesoro->iniciarCursor();
+				while (ptrlistptrtesoro->avanzarCursor()){
+					if (ptrlistptrtesoro->obtenerCursor()->getPropietario() == this->ptrJugadorActual){
+						return ptrlistptrtesoro->obtenerCursor();
+					}
+				}
+				return NULL;
+			}
+			return NULL;
 		}
 
+		/*
+		* Pre: Recibe puntero a jugador.
+		* Post: Devuelve puntero al 1er tesoro de jugador recibido si no devuelve NULL.
+		*/
+		Tesoro* obtenerTesoroDeJugador(Jugador* ptrJugador){
+			Lista<Tesoro*>* ptrlistptrtesoro = this->ptrlistptrtesoro;
+			if (!ptrlistptrtesoro->estaVacia()){
+				ptrlistptrtesoro->iniciarCursor();
+				while (ptrlistptrtesoro->avanzarCursor()){
+					if (ptrlistptrtesoro->obtenerCursor()->getPropietario() == ptrJugador){
+						return ptrlistptrtesoro->obtenerCursor();
+					}
+				}
+				return NULL;
+			}
+			return NULL;
+		}
+
+		/*
+		* Pre: Recibe puntero a jugador.
+		* Post: Devuelve puntero al 1er tesoro de jugador distinto al recibido si no devuelve NULL.
+		*/
+		Tesoro* obtenerTesoroContrario(Jugador* ptrJugador){
+			Lista<Tesoro*>* ptrlistptrtesoro = this->ptrlistptrtesoro;
+			if (!ptrlistptrtesoro->estaVacia()){
+				ptrlistptrtesoro->iniciarCursor();
+				while (ptrlistptrtesoro->avanzarCursor()){
+					if (ptrlistptrtesoro->obtenerCursor()->getPropietario() != ptrJugador){
+						//cout<<"FUE LLAMADO"<< ptrlistptrtesoro->obtenerCursor()->getPropietario() << " " <<ptrJugador<<endl;
+						return ptrlistptrtesoro->obtenerCursor();
+					}
+				}
+				return NULL;
+			}
+			return NULL;
+		}
 
 		/*
 		* Pre: -
-		* Post: Asignar una cantidad de turnos inactivos a la celda
+		* Post: Devuelve puntero a jugador actual.
 		*/
-		void setTurnosInactivosRestantes(unsigned int cantidadTurnosInactivos){
+		Jugador* obtenerJugadorActual(){
+			return this->ptrJugadorActual;
+		}
+
+		/*
+		* Pre: -
+		* Post: Devuelve turnosInactivosRestantes de la celda.
+		*/
+		unsigned int getTurnosInactivosRestantes(){
+			return this->turnosInactivosRestantes;
+		}
+
+		/*
+		* Pre: -
+		* Post: Devuelve la coordenada X de la celda.
+		*/
+		unsigned int getCoordenadaX(){
+			return this->coordenadaX;
+		}
+
+		/*
+		* Pre: -
+		* Post: Devuelve la coordenada Y de la celda.
+		*/
+		unsigned int getCoordenadaY(){
+			return this->coordenadaY;
+		}
+
+		/*
+		* Pre: -
+		* Post: Devuelve la coordenada Z de la celda.
+		*/
+		unsigned int getCoordenadaZ(){
+			return this->coordenadaZ;
+		}
+
+		/*
+		* Pre: Cantidad de turnos inactivos es mayor a cero.
+		* Post: Inactiva celda según la cantidad dada.
+		*/
+		void inactivarCelda(unsigned int cantidadTurnosInactivos){
 			this->turnosInactivosRestantes = cantidadTurnosInactivos;
+			this->estado = CELDAINACTIVA;
+		}
+
+		/*
+		* Pre: -
+		* Post: Reactiva celda si la cantidad de turnos inactivos es 0.
+		*/
+		void reactivarCelda(){
+			if ((this->estado == CELDAINACTIVA) && (this->turnosInactivosRestantes == 0)){
+				this->turnosInactivosRestantes = 0;
+				this->estado = CELDAACTIVA;
+			}
+		}
+
+		/*
+		* Pre: recibe puntero a espia.
+		* Post: Lo agrega si no hay o ya tiene eliminando anterior y si hay contrario elimina ambos 
+		*/
+		void addEspia(Espia* ptrEspia){
+			if (this->ptrEspia == NULL){
+				this->ptrEspia = ptrEspia;
+			}
+			else if(this->tieneEspia(ptrEspia->getPropietario())){
+				this->eliminarEspia();
+				this->ptrEspia = ptrEspia;
+			}
+			else{
+				this->eliminarEspia();
+				delete ptrEspia;
+			}
+		}
+
+		/*
+		* Pre: recibe puntero a mina.
+		* Post: agrega esa misma.
+		*/
+		void addMina(Mina* ptrMina){
+			if (this->ptrMina == NULL){
+				this->ptrMina = ptrMina;
+			}
+			else{
+				this->eliminarMina();
+				delete ptrMina;
+			}
 		}
 
 		/*
@@ -135,23 +233,10 @@ class Celda {
 		* Post: agrega ese mismo de la lista.
 		*/
 		void addTesoro(Tesoro* tesoro){
-			this->tesoros->agregar(tesoro);
-		}
-
-		/*
-		* Pre: recibe puntero a espia.
-		* Post: agrega ese mismo.
-		*/
-		void addEspia(Espia* espia){
-			this->espia = espia;
-		}
-
-		/*
-		* Pre: recibe puntero a mina.
-		* Post: agrega esa misma.
-		*/
-		void addMina(Mina* mina){
-			this->mina = mina;
+			if (!this->ptrlistptrtesoro->estaVacia() && !tieneTesoro(tesoro->getPropietario())){
+				cout<< "tesoro enemigo en celda:" << this->coordenadaX <<"-"<< this->coordenadaY <<"-"<<this->coordenadaZ <<endl;  
+			}
+			this->ptrlistptrtesoro->agregar(tesoro);
 		}
 
 		/*
@@ -159,8 +244,8 @@ class Celda {
 		* Post: Libera puntero a espia.
 		*/
 		void eliminarEspia(){
-			delete this->espia;
-			this->espia = NULL;
+			delete this->ptrEspia;
+			this->ptrEspia = NULL;
 		}
 
 		/*
@@ -168,44 +253,172 @@ class Celda {
 		* Post: Libera puntero a mina.
 		*/
 		void eliminarMina(){
-			delete this->mina;
-			this->mina = NULL;
+			delete this->ptrMina;
+			this->ptrMina = NULL;
+		}
+
+		/*
+		* Pre: -
+		* Post: Libera punteros a tesoros y vacía la lista.
+		*/
+		void eliminarTodosTesoros(){
+			Lista<Tesoro*>* ptrlistptrtesoro = this->ptrlistptrtesoro;
+			ptrlistptrtesoro->iniciarCursor();
+			while(ptrlistptrtesoro->avanzarCursor()){
+				delete ptrlistptrtesoro->obtenerCursor();
+			}
+			delete ptrlistptrtesoro;
+			this->ptrlistptrtesoro = new Lista<Tesoro*>;
+		}
+
+		/*
+		* Pre: recibe puntero a tesoro.
+		* Post: saca y elimina ese mismo de la lista.
+		*/
+		void eliminarTesoro(Tesoro* tesoro){
+			this->sacarTesoro(tesoro);
+			delete tesoro;
 		}
 		
 		/*
 		* Pre: recibe puntero a tesoro.
 		* Post: saca ese mismo de la lista.
 		*/
-		void eliminarTesoro(Tesoro* tesoro){
-			Lista<Tesoro*>* ptrtesoros = this->tesoros;
+		void sacarTesoro(Tesoro* tesoro){
+			Lista<Tesoro*>* ptrlistptrtesoro = this->ptrlistptrtesoro;
 			unsigned int i = 1;
-			ptrtesoros->iniciarCursor();
-			while (ptrtesoros->avanzarCursor()){
-				if (ptrtesoros->obtenerCursor() == tesoro){
-					ptrtesoros->remover(i);
+			ptrlistptrtesoro->iniciarCursor();
+			while (ptrlistptrtesoro->avanzarCursor()){
+				if (ptrlistptrtesoro->obtenerCursor() == tesoro){
+					ptrlistptrtesoro->remover(i);
 					break;
 				}
 			}
 		}
 
+		/*
+		* Pre: Recibe un puntero a un jugador.
+		* Post: Devuelve true si tiene espia en esta celda.
+		*/
+		bool tieneEspia(Jugador* ptrJugador){
+			if (this->ptrEspia != NULL){
+				return (this->ptrEspia->getPropietario() == ptrJugador);
+			}
+			return false;
+		}
+
+		/*
+		* Pre: Recibe un puntero a un jugador.
+		* Post: Devuelve true si tiene mina en esta celda.
+		*/
+		bool tieneMina(Jugador* ptrJugador){
+			if (this->ptrMina != NULL){
+				return (this->ptrMina->getPropietario() == ptrJugador);
+			}
+			return false;
+		}
+
+		/*
+		* Pre: Recibe un puntero a un jugador.
+		* Post: Devuelve true si tiene algún tesoro en esta celda.
+		*/
+		bool tieneTesoro(Jugador* ptrJugador){
+			Lista<Tesoro*>* ptrlistptrtesoro = this->ptrlistptrtesoro;
+			if (!ptrlistptrtesoro->estaVacia()){
+				ptrlistptrtesoro->iniciarCursor();
+				while (ptrlistptrtesoro->avanzarCursor()){
+					if (ptrlistptrtesoro->obtenerCursor()->getPropietario() == ptrJugador){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		/*
+		* Pre: -
+		* Post: Devuelve contenidos visibles por jugador actual de la celda.
+		*/
+		string visualizarCelda(){
+			string texto = "   ";
+			if (this->estado == CELDAINACTIVA){
+				texto = "XXX";
+			}
+			else{
+				Jugador* ptrJugadorActual = this->ptrJugadorActual;
+				if (this->tieneTesoro(ptrJugadorActual)){
+					texto[0] = 'T';
+					if (this->obtenerTesoroActual()->getEstadoTesoro() == TESOROBLINDADO){
+						texto[0] = 'B';
+						}
+				}
+				if (this->tieneEspia(ptrJugadorActual)){
+					texto[1] = 'E';
+				}
+				if (this->tieneMina(ptrJugadorActual)){
+					texto[2] = 'M';
+				}
+			}
+			return texto; 
+		}
+
+		/*
+		* Pre: -
+		* Post: Acciona el comportamiento de espia.
+		*/
+		void accionarEspia(){
+			if (this->ptrEspia != NULL){
+				Jugador* ptrPropietarioEspia = this->ptrEspia->getPropietario();
+				Tesoro* ptrTesoroContrario = this->obtenerTesoroContrario(ptrPropietarioEspia);
+				if (ptrTesoroContrario != NULL){
+					this->inactivarCelda(4);
+					eliminarTesoro(ptrTesoroContrario);
+				}
+			}
+		}
+
+		/*
+		* Pre: -
+		* Post: Acciona el comportamiento de mina.
+		*/
+		void accionarMina(){
+			if (this->ptrMina != NULL){
+				this->inactivarCelda(this->ptrMina->getPoder());
+				this->eliminarMina();
+				this->eliminarEspia();
+				this->eliminarTodosTesoros();
+			}
+		}
+
+		/*
+		* Pre: Recibe un puntero a un jugador.
+		* Post: Pasa el turno a la celda y al nuevo jugador.
+		*/
+		void pasarTurnoCelda(Jugador* ptrNuevoJugadorActual){
+			if ((this->estado == CELDAINACTIVA) && (this->turnosInactivosRestantes > 0)){
+				this->turnosInactivosRestantes--;
+			}
+			this->accionarMina();
+			this->accionarEspia();
+			this->reactivarCelda();
+			this->ptrJugadorActual = ptrNuevoJugadorActual;
+		}
 
 		/*
 		* Pre: -
 		* Post: Libera datos dinamicos de la celda
 		*/
 		~Celda(){
-			delete espia;
-			delete mina;
-			Lista<Tesoro*>* ptrlistptrtesoro = this->tesoros;
+			delete ptrEspia;
+			delete ptrMina;
+			Lista<Tesoro*>* ptrlistptrtesoro = this->ptrlistptrtesoro;
 			ptrlistptrtesoro->iniciarCursor();
 			while(ptrlistptrtesoro->avanzarCursor()){
 				delete ptrlistptrtesoro->obtenerCursor();
 			}
-			delete tesoros;
+			delete ptrlistptrtesoro;
 		}
 };
 
 
-
 #endif /* CELDA_H_ */
-

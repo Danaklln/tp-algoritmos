@@ -2,67 +2,27 @@
 #define ESPIA_H_
 
 #include "Jugador.h"
-#include "Tesoro.h"
 
-class Espia
-{
-private:
-    Jugador *propietario;
-    unsigned int coordenadaCeldaContenedoraX;
-    unsigned int coordenadaCeldaContenedoraY;
-    unsigned int coordenadaCeldaContenedoraZ;
+class Espia{
+    private:
+        Jugador* ptrPropietario;
 
-public:
+    public:
+        /*
+        * Pre: Recibe puntero a un jugador y 3 numeros mayores a cero.
+        * Post: Inicializa Espia indicando el jugador propietario del mismo y las coordenadas del Espia.
+        */
+        Espia(Jugador* ptrJugador){
+            this->ptrPropietario = ptrJugador;
+        };
 
-    /*
-	 * Pre: -
-	 * Post: Inicializa Espia indicando el jugador propietario del mismo y las coordenadas del Espia
-	 */
-    Espia(Jugador* jugador, unsigned int x, unsigned int y, unsigned int z)
-    {
-        this-> propietario = jugador;
-        this-> coordenadaCeldaContenedoraX = x;
-        this-> coordenadaCeldaContenedoraY = y;
-        this-> coordenadaCeldaContenedoraZ = z;
-    };
-
-	/*
-	 * Pre: -
-	 * Post: Devuelve el jugador propietario del Espia
-	 */
-    Jugador* getPropietario()
-    {
-        return this-> propietario;
-    }
-
-	/*
-	 * Pre: -
-	 * Post: Devuelve la coordenada X de la celda, contenedora del espia, del jugador actual
-	 */
-    unsigned int getCeldaContenedoraX()
-    {
-        return this->coordenadaCeldaContenedoraX;
-    }
-
-	/*
-	 * Pre: -
-	 * Post: Devuelve la coordenada Y de la celda, contenedora del espia, del jugador actual
-	 */
-    unsigned int getCeldaContenedoraY()
-    {
-        return this->coordenadaCeldaContenedoraY;
-    }
-
-    /*
-	 * Pre: -
-	 * Post: Devuelve la coordenada Z de la celda, contenedora del espia, del jugador actual
-	 */
-    unsigned int getCeldaContenedoraZ()
-    {
-        return this->coordenadaCeldaContenedoraZ;
-    }
-
+        /*
+        * Pre: -
+        * Post: Devuelve puntero al jugador propietario del Espia
+        */
+        Jugador* getPropietario(){
+            return this->ptrPropietario;
+        }
 };
-
 
 #endif /* ESPIA_H_ */

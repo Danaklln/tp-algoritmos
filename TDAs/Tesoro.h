@@ -3,95 +3,131 @@
 
 #include "Jugador.h"
 
-
-enum EstadoTesoro
-{
-	BLINDADO,
-  	NOBLINDADO
+enum EstadoTesoro{
+	TESORONOBLINDADO,
+    TESOROBLINDADO
 };
 
-class Tesoro
-{
-private:
-    Jugador *propietario;
-	  EstadoTesoro estado;
-    unsigned short turnosBlindajeRestante;
-    unsigned int coordenadaCeldaContenedoraX;
-    unsigned int coordenadaCeldaContenedoraY;
-    unsigned int coordenadaCeldaContenedoraZ;
+class Tesoro{
+    private:
+        Jugador* ptrPropietario;
+        EstadoTesoro estado;
+        unsigned int turnosBlindajeRestante;
+        unsigned int coordenadaX;
+        unsigned int coordenadaY;
+        unsigned int coordenadaZ;
 
-public:
+    public:
+        /*
+        * Pre: recibe puntero a un jugador y 3 numeros mayores a cero
+        * Post: Inicializa Tesoro indicando el jugador ptrPropietario del mismo y las coordenadas del Tesoro
+        */
+        Tesoro(Jugador* ptrJugador, unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
+            this->ptrPropietario = ptrJugador;
+            this->estado = TESORONOBLINDADO;
+            this->turnosBlindajeRestante = 0;
+            this->coordenadaX = coordenadaX;
+            this->coordenadaY = coordenadaY;
+            this->coordenadaZ = coordenadaZ;
+        };
 
-    /*
-	 * Pre: -
-	 * Post: Inicializa Tesoro indicando el jugador propietario del mismo y las coordenadas del Tesoro
-	 */
-    Tesoro(Jugador* jugador, unsigned int x, unsigned int y, unsigned int z)
-    {
-        this-> propietario = jugador;
-        this-> turnosBlindajeRestante = 0;
-        this-> coordenadaCeldaContenedoraX = x;
-        this-> coordenadaCeldaContenedoraY = y;
-        this-> coordenadaCeldaContenedoraZ = z;
-    };
+        /*
+        * Pre: -
+        * Post: Devuelve puntero al jugador propietario del tesoro
+        */
+        Jugador* getPropietario(){
+            return this-> ptrPropietario;
+        }
 
-	/*
-	 * Pre: -
-	 * Post: Devuelve el jugador propietario del tesoro
-	 */
-    Jugador* getPropietario()
-    {
-        return this-> propietario;
-    }
+        /*
+        * Pre: -
+        * Post: Devuelve estado del tesoro.
+        */
+        EstadoTesoro getEstadoTesoro(){
+            return this->estado;
+        }
 
-	/*
-	 * Pre: -
-	 * Post: Devuelve la coordenada X de la celda del jugador actual
-	 */
-    unsigned int getCeldaContenedoraX()
-    {
-        return this->coordenadaCeldaContenedoraX;
-    }
+        /*
+        * Pre: -
+        * Post: Devuelve la cantidad de turnos de blindaje restantes del tesoro.
+        */
+        unsigned int getTurnosBlindajeRestante(){
+            return this -> turnosBlindajeRestante;
+        }
 
-	/*
-	 * Pre: -
-	 * Post: Devuelve la coordenada Y de la celda del jugador actual
-	 */
-    unsigned int getCeldaContenedoraY()
-    {
-        return this->coordenadaCeldaContenedoraY;
-    }
+        /*
+        * Pre: -
+        * Post: Devuelve la coordenada X.
+        */
+        unsigned int getCoordenadaX(){
+            return this->coordenadaX;
+        }
 
-    /*
-	 * Pre: -
-	 * Post: Devuelve la coordenada Z de la celda del jugador actual
-	 */
-    unsigned int getCeldaContenedoraZ()
-    {
-        return this->coordenadaCeldaContenedoraZ;
-    }
+        /*
+        * Pre: -
+        * Post: Devuelve la coordenada Y.
+        */
+        unsigned int getCoordenadaY(){
+            return this->coordenadaY;
+        }
 
+        /*
+        * Pre: -
+        * Post: Devuelve la coordenada Z.
+        */
+        unsigned int getCoordenadaZ(){
+            return this->coordenadaZ;
+        }
 
-	/*
-	 * Pre: El tesoro debe encontrarse en EstadoTesoro = BLINDADO
-	 * Post: Devuelve la cantidad de turnos de blindaje restantes del tesoro
-	 */
-	unsigned short getTurnosBlindajeRestante()
-	{
-		return this -> turnosBlindajeRestante;
-	}
+        /*
+        * Pre: cantidad de turnos de blindaje debe ser positivo mayor a 0
+        * Post: Blinda celda segun los turnos de blindaje asignados.
+        */
+        void blindarTesoro(unsigned int cantidadTurnosBlindaje){
+            this->turnosBlindajeRestante = cantidadTurnosBlindaje;
+            this->estado = TESOROBLINDADO;
+        }
 
+        /*
+        * Pre: -
+        * Post: Desblinda la celda si pasaron sus turnos de blindaje
+        */
+        void sacarBlindaje(){
+            if ( this->turnosBlindajeRestante<=0){
+                this->estado = TESORONOBLINDADO;
+                this->turnosBlindajeRestante = 0;
+            }
+        }
 
-	/*
-	 * Pre: -
-	 * Post: Asignar una cantidad de turnos de blindaje a la celda
-	 */
-	void setTurnosBlindajeRestantes(unsigned short cantidadTurnosBlindaje)
-	{
-		this -> turnosBlindajeRestante = cantidadTurnosBlindaje;
-	}
+        /*
+        * Pre: -
+        * Post: Asigna una cantidad de turnos de blindaje a la celda.
+        */
+        void setTurnosBlindajeRestantes(unsigned int cantidadTurnosBlindaje){
+            this->turnosBlindajeRestante = cantidadTurnosBlindaje;
+        }
 
+        /*
+        * Pre: -
+        * Post: Desblinda o resta un turno de blindaje si corresponde.
+        */
+        void pasarTurnoBlindado(){
+            this->sacarBlindaje();
+            if (this->turnosBlindajeRestante > 0){
+                this->turnosBlindajeRestante--;
+            } 
+        }
+
+        /*
+        * Pre: recibe 3 numeros mayores a cero.
+        * Post: Modifica las coordenadas guardadas.
+        */
+        void actualizarCoordenadas(unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
+            this->coordenadaX = coordenadaX;
+            this->coordenadaY = coordenadaY;
+            this->coordenadaZ = coordenadaZ;
+        }
 };
-
 
 #endif /* TESORO_H_ */
+
