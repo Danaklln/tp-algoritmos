@@ -103,7 +103,7 @@ class Interfaz{
 		void msjTurno(int);
 		void msjGanador(int);
 		void msjEmpate();
-		void Interfaz::msjYaHayTesoro();
+		void msjYaHayTesoro();
 
 		void pedirDimensiones(unsigned int *, unsigned int *, unsigned int *);
 		unsigned int pedirCantidadJugadores();
@@ -112,7 +112,7 @@ class Interfaz{
 		void pedirPosicionMina(unsigned int *, unsigned int *, unsigned int *);
 		void pedirPosicionTesoro(unsigned int *, unsigned int *, unsigned int *);
 		tOpcion preguntarMoverTesoro();
-		tOpcion Interfaz::preguntarJugarCarta();
+		tOpcion preguntarJugarCarta();
 		unsigned int pedirIdTesoro();
 		unsigned char pedirDireccion();
 

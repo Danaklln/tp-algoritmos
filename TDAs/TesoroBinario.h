@@ -11,7 +11,6 @@
 #include "Jugador.h"
 #include "Lista.h"
 #include "Celda.h"
-#include "Carta.h"
 #include "Tesoro.h"
 #include "Tablero.h"
 #include "Interfaz.h"

@@ -10,8 +10,8 @@
 using namespace std;
 
 enum EstadoCelda{
-	CELDAINACTIVA,
-	CELDAACTIVA
+	CELDA_INACTIVA,
+	CELDA_ACTIVA
 };
 
 
@@ -42,7 +42,7 @@ class Celda {
 			this->coordenadaX = coordenadaX;
 			this->coordenadaY = coordenadaY;
 			this->coordenadaZ = coordenadaZ;
-			this->estado = CELDAACTIVA;
+			this->estado = CELDA_ACTIVA;
 			this->turnosInactivosRestantes = 0;
 			this->ptrlistptrtesoro = new Lista<Tesoro*>;
 			this->ptrEspia = NULL;
@@ -182,7 +182,7 @@ class Celda {
 		*/
 		void inactivarCelda(unsigned int cantidadTurnosInactivos){
 			this->turnosInactivosRestantes = cantidadTurnosInactivos;
-			this->estado = CELDAINACTIVA;
+			this->estado = CELDA_INACTIVA;
 		}
 
 		/*
@@ -190,9 +190,9 @@ class Celda {
 		* Post: Reactiva celda si la cantidad de turnos inactivos es 0.
 		*/
 		void reactivarCelda(){
-			if ((this->estado == CELDAINACTIVA) && (this->turnosInactivosRestantes == 0)){
+			if ((this->estado == CELDA_INACTIVA) && (this->turnosInactivosRestantes == 0)){
 				this->turnosInactivosRestantes = 0;
-				this->estado = CELDAACTIVA;
+				this->estado = CELDA_ACTIVA;
 			}
 		}
 
@@ -297,26 +297,49 @@ class Celda {
 		}
 
 		/*
-		* Pre: Recibe un puntero a un jugador.
-		* Post: Devuelve true si tiene espia en esta celda.
+		* Pre: -
+		* Post: Devuelve un booleano indicando si hay un
+        * espía en la casilla
 		*/
-		bool tieneEspia(Jugador* ptrJugador){
-			if (this->ptrEspia != NULL){
-				return (this->ptrEspia->getPropietario() == ptrJugador);
-			}
-			return false;
+		bool tieneEspia(){
+            return !(!this->ptrEspia);
 		}
 
-		/*
-		* Pre: Recibe un puntero a un jugador.
-		* Post: Devuelve true si tiene mina en esta celda.
-		*/
-		bool tieneMina(Jugador* ptrJugador){
-			if (this->ptrMina != NULL){
-				return (this->ptrMina->getPropietario() == ptrJugador);
-			}
-			return false;
+        /*
+         * Pre: Debe haber un espía en la casilla
+         * Post: Devuelve un puntero al propietario del espia
+         * en cuestión
+         */
+		bool obtenerPropietarioEspia(){
+            if (!this->tieneEspia()) throw "[ERROR] No hay un espía en la casilla";
+
+			return this->ptrEspia->getPropietario();
 		}
+
+
+		/*
+		* Pre: -
+		* Post: Devuelve un booleano indicando si hay una
+        * mina en la casilla
+		*/
+		bool tieneMina(){
+            return !(!this->ptrMina);
+		}
+
+        /*
+         * Pre: Debe haber una mina colocada en la casilla
+         * Post: Devuelve un puntero a el jugador propietario de la
+         * mina.
+         */
+        Jugador* obtenerPropietarioMina()
+        {
+            if (!this->ptrMina)
+            {
+                throw "[ERROR] No hay una mina en la casilla";
+            }
+
+            return this->ptrMina->getPropietario(); 
+        }
 
 		/*
 		* Pre: Recibe un puntero a un jugador.
@@ -335,13 +358,34 @@ class Celda {
 			return false;
 		}
 
+        /*
+         * Pre: Se debe proporcionar un puntero a jugador valido
+         * Post: Devuelve un booleano indicando si hay tesoros en la casilla
+         * que no pertenezcan al jugador en cuestion
+         */
+        bool tieneTesoroRival(Jugador* jugador)
+        {
+            Lista<Tesoro*>* tesorosEnLaCasilla = this->ptrlistptrtesoro;
+            tesorosEnLaCasilla->iniciarCursor();
+            while (tesorosEnLaCasilla->avanzarCursor())
+            {
+                Tesoro* tesoroActual = tesorosEnLaCasilla->obtenerCursor();
+                if (tesoroActual->getPropietario() != jugador)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 		/*
 		* Pre: -
 		* Post: Devuelve contenidos visibles por jugador actual de la celda.
 		*/
 		string visualizarCelda(){
 			string texto = "   ";
-			if (this->estado == CELDAINACTIVA){
+			if (this->estado == CELDA_INACTIVA){
 				texto = "XXX";
 			}
 			else{
@@ -395,7 +439,7 @@ class Celda {
 		* Post: Pasa el turno a la celda y al nuevo jugador.
 		*/
 		void pasarTurnoCelda(Jugador* ptrNuevoJugadorActual){
-			if ((this->estado == CELDAINACTIVA) && (this->turnosInactivosRestantes > 0)){
+			if ((this->estado == CELDA_INACTIVA) && (this->turnosInactivosRestantes > 0)){
 				this->turnosInactivosRestantes--;
 			}
 			this->accionarMina();

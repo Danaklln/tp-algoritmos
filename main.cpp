@@ -1,11 +1,11 @@
-#include "TesoroBinario.h"
-#include "Interfaz.h"
+#include "./TDAs/TesoroBinario.h"
+#include "./TDAs/Interfaz.h"
 
 int main(){
     
     unsigned int cantidadJugadores;
     unsigned int x,y,z;
-    TesoroBinario * Juego;
+    TesoroBinario * juego;
     Interfaz * interfaz;
     bool salir;
 

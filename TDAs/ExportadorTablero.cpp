@@ -8,7 +8,7 @@ ExportadorTablero::ExportadorTablero(Tablero* tablero)
 {
     if (!tablero)
     {
-        throw "[ERROR] No se procorcionó un tablero";
+        throw "[ERROR] No se proporcionó un tablero";
     }
 
     uint tableroX = tablero->getDimensionX(),
@@ -129,10 +129,30 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
         {
             Celda* celdaActual = pisoActualX->obtenerCursor();
 
-            if (celdaActual->getEstado() == INACTIVA)
+            if (celdaActual->getEstado() == CELDA_INACTIVA)
             {
                 this->dibujarCruz(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
-                continue;
+                continue; // No es necesario dibujar nada mas
+            }
+
+            if (celdaActual->tieneTesoro(jugador))
+            {
+                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), true);
+            }
+
+            if (celdaActual->tieneTesoroRival(jugador))
+            {
+                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), false);
+            }
+
+            if (celdaActual->tieneMina() && celdaActual->obtenerPropietarioMina() == jugador)
+            {
+                this->dibujarMina(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
+            }
+
+            if (celdaActual->tieneEspia() && celdaActual->obtenerPropietarioEspia() == jugador)
+            {
+                this->dibujarEspia(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
             }
         }
     }

@@ -1,5 +1,5 @@
-#ifndef GUARD_EXPORTADOR_PRINTER
-#define GUARD_EXPORTADOR_PRINTER
+#ifndef GUARD_EXPORTADOR_TABLERO
+#define GUARD_EXPORTADOR_TABLERO
 
 #include "Tablero.h"
 #include "Jugador.h"
