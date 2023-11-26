@@ -4,10 +4,13 @@
 #include "Jugador.h"
 
 class Espia{
+
     private:
+
         Jugador* ptrPropietario;
 
     public:
+    
         /*
         * Pre: Recibe puntero a un jugador y 3 numeros mayores a cero.
         * Post: Inicializa Espia indicando el jugador propietario del mismo y las coordenadas del Espia.

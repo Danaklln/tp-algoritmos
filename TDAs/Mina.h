@@ -4,11 +4,14 @@
 #include "Jugador.h"
 
 class Mina{
+
     private:
+
         unsigned int poder;
         Jugador* ptrPropietario;
 
     public:
+
         /*
         * Pre: Recibe un numero mayor que cero.
         * Post: Inicializa Mina indicando el poder de la misma.
@@ -34,6 +37,5 @@ class Mina{
             return this->ptrPropietario;
         }
 };
-
 
 #endif /* MINA_H_ */

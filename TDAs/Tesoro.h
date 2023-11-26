@@ -4,12 +4,14 @@
 #include "Jugador.h"
 
 enum EstadoTesoro{
-	TESORONOBLINDADO,
-    TESOROBLINDADO
+	TESORO_NO_BLINDADO,
+    TESORO_BLINDADO
 };
 
 class Tesoro{
+
     private:
+
         Jugador* ptrPropietario;
         EstadoTesoro estado;
         unsigned int turnosBlindajeRestante;
@@ -18,13 +20,14 @@ class Tesoro{
         unsigned int coordenadaZ;
 
     public:
+    
         /*
         * Pre: recibe puntero a un jugador y 3 numeros mayores a cero
         * Post: Inicializa Tesoro indicando el jugador ptrPropietario del mismo y las coordenadas del Tesoro
         */
         Tesoro(Jugador* ptrJugador, unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
             this->ptrPropietario = ptrJugador;
-            this->estado = TESORONOBLINDADO;
+            this->estado = TESORO_NO_BLINDADO;
             this->turnosBlindajeRestante = 0;
             this->coordenadaX = coordenadaX;
             this->coordenadaY = coordenadaY;
@@ -85,7 +88,7 @@ class Tesoro{
         */
         void blindarTesoro(unsigned int cantidadTurnosBlindaje){
             this->turnosBlindajeRestante = cantidadTurnosBlindaje;
-            this->estado = TESOROBLINDADO;
+            this->estado = TESORO_BLINDADO;
         }
 
         /*
@@ -94,7 +97,7 @@ class Tesoro{
         */
         void sacarBlindaje(){
             if ( this->turnosBlindajeRestante<=0){
-                this->estado = TESORONOBLINDADO;
+                this->estado = TESORO_NO_BLINDADO;
                 this->turnosBlindajeRestante = 0;
             }
         }
