@@ -117,7 +117,7 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 {
     bitmap_image imagenAExportar(this->imageW + 1, this->imageH + 1);
     dibujarGrilla(imagenAExportar);
-    Lista<Lista<Celda*>*>* pisoActual = tablero->obtenerNivel(piso);
+    Lista<Lista<Celda*>*>* pisoActual = tablero->obtenerPiso(piso);
 
     pisoActual->iniciarCursor();
     while(pisoActual->avanzarCursor())
@@ -145,12 +145,12 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
                 this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), false);
             }
 
-            if (celdaActual->tieneMina() && celdaActual->obtenerPropietarioMina() == jugador)
+            if (celdaActual->hayMinaEnLaCasilla() && celdaActual->tieneMina(jugador))
             {
                 this->dibujarMina(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
             }
 
-            if (celdaActual->tieneEspia() && celdaActual->obtenerPropietarioEspia() == jugador)
+            if (celdaActual->hayEspiaEnLaCasilla() && celdaActual->obtenerEspia()->getPropietario() == jugador)
             {
                 this->dibujarEspia(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
             }

@@ -71,7 +71,7 @@ class Celda {
 		* Post: Devuelve puntero a la unica mina de la celda.
 		*/
 		Mina* obtenerMina(){
-			return 	this->ptrMina; 
+			return this->ptrMina; 
 		}
 
 		/*
@@ -84,6 +84,16 @@ class Celda {
 			}
 			return (this->ptrMina->getPropietario() == ptrJugador);
 		}
+
+        /*
+         *  Pre: -
+         *  Post: Devuelve un booleano indicando si hay una mina en la
+         *  casilla
+         */
+        bool hayMinaEnLaCasilla()
+        {
+            return !(!this->ptrMina);
+        }
 
 		/*
 		* Pre: Recibe un puntero a un jugador.
@@ -116,9 +126,20 @@ class Celda {
 			return this->ptrEspia; 
 		}
 
+        /*
+         * Pre: -
+         * Post: Devuelve un booleano indicando si hay un
+         * espia en la casilla.
+         */
+        bool hayEspiaEnLaCasilla()
+        {
+            return !(!this->ptrEspia);
+        }
+
 		/*
 		* Pre: Recibe un puntero a un jugador.
-		* Post: Devuelve true si tiene espia en esta celda.
+		* Post: Devuelve true si el espia pertenece al jugador
+        * indicado en el parámetro.
 		*/
 		bool tieneEspia(Jugador* ptrJugador){
 			if (this->ptrEspia == NULL){
@@ -193,6 +214,50 @@ class Celda {
 			}
 			return false;
 		}
+
+        /*
+         * Pre: Se debe proporcionar un puntero a Jugador valido
+         * Post: Devuelve un booleano indicando si hay un tesoro en
+         * la casilla que no pertenezca al jugador indicado
+         */
+        bool tieneTesoroRival(Jugador* jugador)
+        {
+            Lista<Tesoro*>* tesorosEnCasilla = this->ptrlistptrtesoro;
+            tesorosEnCasilla->iniciarCursor();
+
+            while(tesorosEnCasilla->avanzarCursor())
+            {
+                Tesoro* tesoroActual = tesorosEnCasilla->obtenerCursor();
+                if (tesoroActual->getPropietario() != jugador)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /*
+         * Pre: Se debe proporcionar un punteor a Jugador valido
+         * Post: Devuelve un booleano indicando si el jugador indicado
+         * posee un tesoro en la casilla.
+         */
+        bool tieneTesoro(Jugador* jugador)
+        {
+            Lista<Tesoro*>* tesorosEnCasilla = this->ptrlistptrtesoro;
+            tesorosEnCasilla->iniciarCursor();
+            
+            while(tesorosEnCasilla->avanzarCursor())
+            {
+                Tesoro* tesoroActual = tesorosEnCasilla->obtenerCursor();
+                if (tesoroActual->getPropietario() == jugador)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
 		/*
 		* Pre: -
