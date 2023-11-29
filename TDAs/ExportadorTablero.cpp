@@ -89,7 +89,7 @@ void ExportadorTablero::dibujarMina(bitmap_image& image, unsigned int x, unsigne
                 (TABLERO_TAMANIO_CUADRADO + 2) / 2);
 }
 
-void dibujarCruz(bitmap_image& image, unsigned int x, unsigned int y)
+void ExportadorTablero::dibujarCruz(bitmap_image& image, unsigned int x, unsigned int y)
 {
     image_drawer draw(image);
 
