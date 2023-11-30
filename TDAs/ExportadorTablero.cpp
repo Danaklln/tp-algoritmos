@@ -59,8 +59,6 @@ void ExportadorTablero::dibujarGrilla(bitmap_image& imagen)
 
 void ExportadorTablero::dibujarEspia(bitmap_image& image, unsigned int x, unsigned int y)
 {
-    std::cout << x << " " << this->tableroX << std::endl;
-    std::cout << y << " " << this->tableroY << std::endl;
     if (!image || x > this->tableroX || y > this->tableroY) throw "[ERROR] Parametros inválidos";
 
     image_drawer draw(image);
@@ -159,10 +157,10 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 
             if (celdaActual->hayEspiaEnLaCasilla() && celdaActual->obtenerEspia()->getPropietario() == jugador)
             {
-                this->dibujarEspia(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
-            } // Hay error
-            imagenAExportar.save_image("PISO_2.bmp");
-            return;
+                this->dibujarEspia(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1);
+            }
         }
     }
+
+    imagenAExportar.save_image("PISO_2.bmp");
 }

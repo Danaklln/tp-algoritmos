@@ -13,10 +13,10 @@ int main()
     ExportadorTablero* exportadorTablero = new ExportadorTablero(tablero);
 
     // Agregando objetos al tablero con jugadorUno de propietario en el segundo piso
-    tablero->agregarNuevoEspia(jugadorUno, 1, 1, 2);
-    tablero->agregarNuevoEspia(jugadorUno, 1, 2, 2);
-    tablero->agregarNuevoEspia(jugadorUno, 1, 3, 2);
-    tablero->agregarNuevoTesoro(jugadorUno, 1, 1, 2);
+    std::cout << tablero->agregarNuevoEspia(jugadorUno, 1, 1, 2);
+    std::cout << tablero->agregarNuevoEspia(jugadorUno, 1, 2, 2);
+    std::cout << tablero->agregarNuevoEspia(jugadorUno, 1, 3, 2);
+    tablero->agregarNuevoTesoro(jugadorUno, 1, 2, 2);
 
     // Exportando el piso dos del tablero
     exportadorTablero->exportarPisoTablero(tablero, jugadorUno, 2);
