@@ -3,6 +3,7 @@
 #include "Celda.h"
 #include "bitmapConfig.h"
 #include "bitmap_image.hpp"
+#include <iostream>
 
 ExportadorTablero::ExportadorTablero(Tablero* tablero)
 {
@@ -16,6 +17,8 @@ ExportadorTablero::ExportadorTablero(Tablero* tablero)
 
     this->imageW = tableroX * (TABLERO_TAMANIO_CUADRADO + 2);
     this->imageH = tableroY * (TABLERO_TAMANIO_CUADRADO + 2);
+    this->tableroX = tableroX;
+    this->tableroY = tableroY;
     this->cantPisos = tablero->getDimensionZ();
 }
 
@@ -56,6 +59,8 @@ void ExportadorTablero::dibujarGrilla(bitmap_image& imagen)
 
 void ExportadorTablero::dibujarEspia(bitmap_image& image, unsigned int x, unsigned int y)
 {
+    std::cout << x << " " << this->tableroX << std::endl;
+    std::cout << y << " " << this->tableroY << std::endl;
     if (!image || x > this->tableroX || y > this->tableroY) throw "[ERROR] Parametros inválidos";
 
     image_drawer draw(image);
@@ -137,13 +142,15 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 
             if (celdaActual->tieneTesoro(jugador))
             {
-                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), true);
+                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), false);
+                std::cout << "RUN";
             }
 
             if (celdaActual->tieneTesoroRival(jugador))
             {
                 this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), false);
             }
+            
 
             if (celdaActual->hayMinaEnLaCasilla() && celdaActual->tieneMina(jugador))
             {
@@ -153,7 +160,9 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
             if (celdaActual->hayEspiaEnLaCasilla() && celdaActual->obtenerEspia()->getPropietario() == jugador)
             {
                 this->dibujarEspia(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
-            }
+            } // Hay error
+            imagenAExportar.save_image("PISO_2.bmp");
+            return;
         }
     }
 }
