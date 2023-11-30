@@ -4,6 +4,7 @@
 #include "bitmapConfig.h"
 #include "bitmap_image.hpp"
 #include <iostream>
+#include <string>
 
 ExportadorTablero::ExportadorTablero(Tablero* tablero)
 {
@@ -162,5 +163,5 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
         }
     }
 
-    imagenAExportar.save_image("PISO_2.bmp");
+    imagenAExportar.save_image("Tablero_piso_" + to_string(piso) + ".bmp");
 }
