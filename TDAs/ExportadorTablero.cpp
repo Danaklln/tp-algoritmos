@@ -4,6 +4,7 @@
 #include "bitmapConfig.h"
 #include "bitmap_image.hpp"
 #include <iostream>
+#include <string>
 
 ExportadorTablero::ExportadorTablero(Tablero* tablero)
 {
@@ -29,12 +30,12 @@ void ExportadorTablero::dibujarTesoro(bitmap_image& image, unsigned int x, unsig
     draw.pen_color(esTesoroRival ? COLOR_TESORO_RIVAL.R : COLOR_TESORO.R,
                    esTesoroRival ? COLOR_TESORO_RIVAL.G : COLOR_TESORO.G,
                    esTesoroRival ? COLOR_TESORO_RIVAL.B : COLOR_TESORO.B);
-    draw.pen_width(3);
+    draw.pen_width(2);
 
-    draw.rectangle(x * (TABLERO_TAMANIO_CUADRADO + 2),
-                   y * (TABLERO_TAMANIO_CUADRADO + 2),
-                   (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2),
-                   (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2)
+    draw.rectangle(x * (TABLERO_TAMANIO_CUADRADO + 2) + (esTesoroRival ? 3 : 1),
+                   y * (TABLERO_TAMANIO_CUADRADO + 2) + (esTesoroRival ? 3 : 1),
+                   (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - (esTesoroRival ? 4 : 2),
+                   (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - (esTesoroRival ? 4 : 2)
                    );
 }
 
@@ -59,8 +60,6 @@ void ExportadorTablero::dibujarGrilla(bitmap_image& imagen)
 
 void ExportadorTablero::dibujarEspia(bitmap_image& image, unsigned int x, unsigned int y)
 {
-    std::cout << x << " " << this->tableroX << std::endl;
-    std::cout << y << " " << this->tableroY << std::endl;
     if (!image || x > this->tableroX || y > this->tableroY) throw "[ERROR] Parametros inválidos";
 
     image_drawer draw(image);
@@ -148,7 +147,7 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 
             if (celdaActual->tieneTesoroRival(jugador))
             {
-                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), false);
+                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), true);
             }
             
 
@@ -159,10 +158,10 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 
             if (celdaActual->hayEspiaEnLaCasilla() && celdaActual->obtenerEspia()->getPropietario() == jugador)
             {
-                this->dibujarEspia(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
-            } // Hay error
-            imagenAExportar.save_image("PISO_2.bmp");
-            return;
+                this->dibujarEspia(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1);
+            }
         }
     }
+
+    imagenAExportar.save_image("Tablero_piso_" + to_string(piso) + ".bmp");
 }
