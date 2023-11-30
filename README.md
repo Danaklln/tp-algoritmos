@@ -1,3 +1,3 @@
-# Testing branch
+# TP2: Algoritmos y Programacion II
 
-Este branch esta hecho con el único propósito de proporcionar un entorno de prueba para la clase ExportarTablero
+Repositorio oficial del proyecto
