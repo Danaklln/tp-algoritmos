@@ -7,7 +7,7 @@
 // Descripciòn: Implementaciòn de clase Interfaz
 //*****************************************************************************
 
-#include "interfaz.h"
+#include "Interfaz.h"
 
 using namespace std;
 

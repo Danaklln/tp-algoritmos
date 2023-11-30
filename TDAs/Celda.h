@@ -238,6 +238,29 @@ class Celda {
         }
 
         /*
+         * Pre: Se debe proporcionar un puntero a Jugador valido
+         * Post: Devuelve un booleano indicando si hay un tesoro en
+         * la casilla que no pertenezca al jugador indicado
+         */
+        bool tieneTesoroRivalRevelado(Jugador* jugador)
+        {
+            Lista<Tesoro*>* tesorosEnCasilla = this->ptrlistptrtesoro;
+            tesorosEnCasilla->iniciarCursor();
+
+            while(tesorosEnCasilla->avanzarCursor())
+            {
+                Tesoro* tesoroActual = tesorosEnCasilla->obtenerCursor();
+                if (tesoroActual->getPropietario() != jugador && tesoroActual->getVisibilidad() == TESORO_REVELADO)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+            
+        }
+
+        /*
          * Pre: Se debe proporcionar un punteor a Jugador valido
          * Post: Devuelve un booleano indicando si el jugador indicado
          * posee un tesoro en la casilla.

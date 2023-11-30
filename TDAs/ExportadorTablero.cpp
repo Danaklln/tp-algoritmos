@@ -142,10 +142,9 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
             if (celdaActual->tieneTesoro(jugador))
             {
                 this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), false);
-                std::cout << "RUN";
             }
 
-            if (celdaActual->tieneTesoroRival(jugador))
+            if (celdaActual->tieneTesoroRivalRevelado(jugador))
             {
                 this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), true);
             }

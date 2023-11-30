@@ -8,12 +8,18 @@ enum EstadoTesoro{
     TESORO_BLINDADO
 };
 
+enum VisibilidadTesoro {
+    TESORO_OCULTO, // Estado normal de un tesoro
+    TESORO_REVELADO
+};
+
 class Tesoro{
 
     private:
 
         Jugador* ptrPropietario;
         EstadoTesoro estado;
+        VisibilidadTesoro visibilidad;
         unsigned int turnosBlindajeRestante;
         unsigned int coordenadaX;
         unsigned int coordenadaY;
@@ -28,6 +34,7 @@ class Tesoro{
         Tesoro(Jugador* ptrJugador, unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
             this->ptrPropietario = ptrJugador;
             this->estado = TESORO_NO_BLINDADO;
+            this->visibilidad = TESORO_OCULTO;
             this->turnosBlindajeRestante = 0;
             this->coordenadaX = coordenadaX;
             this->coordenadaY = coordenadaY;
@@ -80,6 +87,24 @@ class Tesoro{
         */
         unsigned int getCoordenadaZ(){
             return this->coordenadaZ;
+        }
+
+        /*
+         * Pre: -
+         * Post: Devuelve la visibilidad del tesoro
+         */
+        VisibilidadTesoro getVisibilidad()
+        {
+            return this->visibilidad;
+        }
+
+        /*
+         * Pre: -
+         * Post: Devuelve la visibilidad del tesoro
+         */
+        void setVisibilidad(VisibilidadTesoro nuevaVisibilidad)
+        {
+            this->visibilidad = nuevaVisibilidad;
         }
 
         /*
