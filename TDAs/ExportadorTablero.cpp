@@ -144,24 +144,24 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 
             if (celdaActual->getEstado() == CELDA_INACTIVA)
             {
-                this->dibujarCruz(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
+                this->dibujarCruz(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1);
                 continue; // No es necesario dibujar nada mas
             }
 
             if (celdaActual->tieneTesoro(jugador))
             {
-                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), false);
+                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1, false);
             }
 
             if (celdaActual->tieneTesoroRivalRevelado(jugador))
             {
-                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), true);
+                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1, true);
             }
             
 
             if (celdaActual->hayMinaEnLaCasilla() && celdaActual->tieneMina(jugador))
             {
-                this->dibujarMina(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY());
+                this->dibujarMina(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1);
             }
 
             if (celdaActual->hayEspiaEnLaCasilla() && celdaActual->obtenerEspia()->getPropietario() == jugador)
