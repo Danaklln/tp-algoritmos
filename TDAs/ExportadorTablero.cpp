@@ -31,10 +31,10 @@ void ExportadorTablero::dibujarTesoro(bitmap_image& image, unsigned int x, unsig
                    esTesoroRival ? COLOR_TESORO_RIVAL.B : COLOR_TESORO.B);
     draw.pen_width(2);
 
-    draw.rectangle(x * (TABLERO_TAMANIO_CUADRADO + 2) + 1,
-                   y * (TABLERO_TAMANIO_CUADRADO + 2) + 1,
-                   (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - 2,
-                   (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - 2
+    draw.rectangle(x * (TABLERO_TAMANIO_CUADRADO + 2) + (esTesoroRival ? 3 : 1),
+                   y * (TABLERO_TAMANIO_CUADRADO + 2) + (esTesoroRival ? 3 : 1),
+                   (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - (esTesoroRival ? 4 : 2),
+                   (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - (esTesoroRival ? 4 : 2)
                    );
 }
 
