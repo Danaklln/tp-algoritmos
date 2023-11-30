@@ -29,12 +29,12 @@ void ExportadorTablero::dibujarTesoro(bitmap_image& image, unsigned int x, unsig
     draw.pen_color(esTesoroRival ? COLOR_TESORO_RIVAL.R : COLOR_TESORO.R,
                    esTesoroRival ? COLOR_TESORO_RIVAL.G : COLOR_TESORO.G,
                    esTesoroRival ? COLOR_TESORO_RIVAL.B : COLOR_TESORO.B);
-    draw.pen_width(3);
+    draw.pen_width(2);
 
-    draw.rectangle(x * (TABLERO_TAMANIO_CUADRADO + 2),
-                   y * (TABLERO_TAMANIO_CUADRADO + 2),
-                   (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2),
-                   (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2)
+    draw.rectangle(x * (TABLERO_TAMANIO_CUADRADO + 2) + 1,
+                   y * (TABLERO_TAMANIO_CUADRADO + 2) + 1,
+                   (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - 2,
+                   (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - 2
                    );
 }
 
@@ -146,7 +146,7 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 
             if (celdaActual->tieneTesoroRival(jugador))
             {
-                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), false);
+                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX(), celdaActual->getCoordenadaY(), true);
             }
             
 
