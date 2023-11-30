@@ -5,6 +5,15 @@
 #include "bitmap_image.hpp"
 #include <iostream>
 #include <string>
+#include <sstream>
+
+template <typename T>
+string NumberToString(T pNumber)
+{
+ ostringstream oOStrStream;
+ oOStrStream << pNumber;
+ return oOStrStream.str();
+}
 
 ExportadorTablero::ExportadorTablero(Tablero* tablero)
 {
@@ -162,5 +171,14 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
         }
     }
 
-    imagenAExportar.save_image("Tablero_piso_" + to_string(piso) + ".bmp");
+    imagenAExportar.save_image("Tablero_piso_" + NumberToString(piso) + ".bmp");
+}
+
+
+void ExportadorTablero::exportarTablero(Tablero* tablero, Jugador* jugador)
+{
+    for (int i = 1; i <= this->cantPisos; i++)
+    {
+        exportarPisoTablero(tablero, jugador, i);
+    }
 }

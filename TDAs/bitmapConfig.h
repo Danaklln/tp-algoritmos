@@ -1,11 +1,9 @@
 #ifndef GUARD_BITMAP_CONFIG
 #define GUARD_BITMAP_CONFIG
-#include <string>
 
 // Archivo de configuracion para las constantes
 
 const unsigned int TABLERO_TAMANIO_CUADRADO = 32;
-const std::string NOMBRE_ARCHIVO_TABLERO = "Tablero.bmp"; // Extension importante!
 
 const struct { // Azul... medio raro
     unsigned int R = 30;

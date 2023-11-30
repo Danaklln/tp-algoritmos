@@ -56,18 +56,25 @@ private:
     void dibujarCruz(bitmap_image& image, unsigned int x, unsigned int y);
 
 public:
-  /*
-   * Pre: -
-   * Post: Crea una instancia de TableroPrinter
-   */
-  ExportadorTablero(Tablero *tablero);
+    /*
+    * Pre: -
+    * Post: Crea una instancia de TableroPrinter
+    */
+    ExportadorTablero(Tablero *tablero);
 
-  /*
-   * Pre: Se debe proporcionar un tablero válido, un jugador valido y un piso > 0 < tableroZ
-   * Post: Se exporta el piso del tablero proporcionado en funcion de lo que veria el jugador
-   * pasado como parametro
-   */
-  void exportarPisoTablero(Tablero *tablero, Jugador* jugador, uint piso);
+    /*
+    * Pre: Se debe proporcionar un tablero válido, un jugador valido y un piso > 0 < tableroZ
+    * Post: Se exporta el piso del tablero proporcionado en funcion de lo que veria el jugador
+    * pasado como parametro
+    */
+    void exportarPisoTablero(Tablero *tablero, Jugador* jugador, uint piso);
+
+    /*
+    * Pre: Se debe proporcionar tablero, jugador, piso validos
+    * Post: Se exporta el tablero entero, creando piso archivos por cada
+    * nivel
+    */
+    void exportarTablero(Tablero *tablero, Jugador* jugador);
 };
 
 #endif
