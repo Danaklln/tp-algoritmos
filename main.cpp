@@ -22,7 +22,7 @@ int main()
     tablero->agregarNuevoTesoro(jugadorDos, 1, 2, 1);
     tablero->obtenerPtrCelda(1, 2, 1)->obtenerTesoroDeJugador(jugadorDos)->setVisibilidad(TESORO_REVELADO);
     tablero->obtenerPtrCelda(1, 2, 1)->obtenerTesoroDeJugador(jugadorDos)->setVisibilidad(TESORO_OCULTO);
-    tablero->obtenerPtrCelda(1,1,1)->addMina(new Mina(5, jugadorUno));
+    tablero->obtenerPtrCelda(1 ,1 ,1)->addMina(new Mina(5, jugadorUno));
     // Exportando el piso dos del tablero
     exportadorTablero->exportarPisoTablero(tablero, jugadorUno, 1);
 }

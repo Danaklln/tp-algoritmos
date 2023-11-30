@@ -36,6 +36,17 @@ class Mina{
         Jugador* getPropietario(){
             return this->ptrPropietario;
         }
+
+        /*
+         * Pre: Se debe proporcionar un puntero a jugador valido
+         * Post: El puntero a propietario cambia por el indicado
+         */
+        void setPropietario(Jugador* nuevoPropietario)
+        {
+            if (!nuevoPropietario) throw "[ERROR] Parametro invalido";
+            
+            this->ptrPropietario = nuevoPropietario;
+        }
 };
 
 #endif /* MINA_H_ */
