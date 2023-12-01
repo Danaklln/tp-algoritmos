@@ -50,13 +50,12 @@ public:
      * post: juega la carta.
     */
     void jugarCartaGuardada(Carta * carta){
-        if(carta == NULL){
-            throw "la carta no puede ser Nula";
-        }
+        verificarCarta(carta);
         if(!this->verificarCartaEnMazo(carta)){
             throw "esa carta no esta en el mazo individual";
         }
         this->jugarCarta(carta);
+        this->removerCarta(carta);
     }
 
     /**
@@ -72,9 +71,7 @@ public:
      * post: juega la carta dependiendo el tipo.
     */
     void jugarCarta(Carta * carta){
-        if(carta == NULL){
-            throw "la carta no puede ser Nula";
-        }
+        verificarCarta(carta);
         switch (carta->getTipoDeCarta()){
             case 0 :
                 cartaBlindaje();
@@ -114,6 +111,26 @@ public:
             }
         }
         return false;
+    }
+    
+    void removerCarta(Carta * carta){
+        verificarCarta(carta);
+        int contador = 0;
+        bool eliminada = false;
+        this->cartasGuardadas->iniciarCursor();
+        while(this->cartasGuardadas->avanzarCursor() && eliminada == false){
+            if(this->cartasGuardadas->obtenerCursor() == carta){
+                this->cartasGuardadas->remover(contador);
+                eliminada = true;
+            }
+            contador++;
+        }
+    }
+
+    void verificarCarta(Carta * carta){
+        if(carta == NULL){
+            throw "la carta no puede ser Nula";
+        }
     }
     
 
