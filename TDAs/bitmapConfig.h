@@ -5,46 +5,39 @@
 
 const unsigned int TABLERO_TAMANIO_CUADRADO = 32;
 
-const struct { // Azul... medio raro
-    unsigned int R = 30;
-    unsigned int G = 84;
-    unsigned int B = 173;
-} COLOR_CUADRADO;
+// Color cuadrados
+const unsigned short COLOR_CUADRADO_R = 30;
+const unsigned short COLOR_CUADRADO_G = 84;
+const unsigned short COLOR_CUADRADO_B = 173;
 
-const struct { // Blanco
-    unsigned int R = 255;
-    unsigned int G = 255;
-    unsigned int B = 255;
-} COLOR_LINEAS;
+// Color lineas del tablero
+const unsigned short COLOR_LINEAS_R = 255;
+const unsigned short COLOR_LINEAS_G = 255;
+const unsigned short COLOR_LINEAS_B = 255;
 
-const struct {
-    unsigned int R = 53;
-    unsigned int G = 255;
-    unsigned int B = 31;
-} COLOR_TESORO;
+// Color tesoro del jugador (propio)
+const unsigned short COLOR_TESORO_PROPIO_R = 53;
+const unsigned short COLOR_TESORO_PROPIO_G = 255;
+const unsigned short COLOR_TESORO_PROPIO_B = 31;
 
-const struct {
-    unsigned int R = 255;
-    unsigned int G = 46;
-    unsigned int B = 31;
-} COLOR_TESORO_RIVAL;
+// Color tesoro del rival
+const unsigned short COLOR_TESORO_RIVAL_R = 255;
+const unsigned short COLOR_TESORO_RIVAL_G = 46;
+const unsigned short COLOR_TESORO_RIVAL_B = 31;
 
-const struct {
-    unsigned int R = 255;
-    unsigned int G = 255;
-    unsigned int B = 255;
-} COLOR_ESPIA;
+// Color espia
+const unsigned short COLOR_ESPIA_R = 255;
+const unsigned short COLOR_ESPIA_G = 255;
+const unsigned short COLOR_ESPIA_B = 255;
 
-const struct {
-    unsigned int R = 255;
-    unsigned int G = 0;
-    unsigned int B = 0;
-} COLOR_MINA;
+// Color mina
+const unsigned short COLOR_MINA_R = 255;
+const unsigned short COLOR_MINA_G = 0;
+const unsigned short COLOR_MINA_B = 0;
 
-const struct {
-    unsigned int R = 255;
-    unsigned int G = 255;
-    unsigned int B = 255;
-} COLOR_CASILLA_INACTIVA;
+// Casilla inactiva (cruz)
+const unsigned short COLOR_CASILLA_INACTIVA_R = 255;
+const unsigned short COLOR_CASILLA_INACTIVA_G = 255;
+const unsigned short COLOR_CASILLA_INACTIVA_B = 255;
 
 #endif

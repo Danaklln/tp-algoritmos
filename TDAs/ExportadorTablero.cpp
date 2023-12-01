@@ -36,9 +36,9 @@ void ExportadorTablero::dibujarTesoro(bitmap_image& image, unsigned int x, unsig
 {
     image_drawer draw(image);
 
-    draw.pen_color(esTesoroRival ? COLOR_TESORO_RIVAL.R : COLOR_TESORO.R,
-                   esTesoroRival ? COLOR_TESORO_RIVAL.G : COLOR_TESORO.G,
-                   esTesoroRival ? COLOR_TESORO_RIVAL.B : COLOR_TESORO.B);
+    draw.pen_color(esTesoroRival ? COLOR_TESORO_RIVAL_R : COLOR_TESORO_PROPIO_R,
+                   esTesoroRival ? COLOR_TESORO_RIVAL_G : COLOR_TESORO_PROPIO_G,
+                   esTesoroRival ? COLOR_TESORO_RIVAL_B : COLOR_TESORO_PROPIO_B);
     draw.pen_width(2);
 
     draw.rectangle(x * (TABLERO_TAMANIO_CUADRADO + 2) + (esTesoroRival ? 3 : 1),
@@ -51,9 +51,8 @@ void ExportadorTablero::dibujarTesoro(bitmap_image& image, unsigned int x, unsig
 void ExportadorTablero::dibujarGrilla(bitmap_image& imagen)
 {
     if (!imagen) throw "[ERROR] No se proporcionó una imagen";
-
     imagen.clear();
-    imagen.set_all_channels(COLOR_CUADRADO.R, COLOR_CUADRADO.G, COLOR_CUADRADO.B);
+    imagen.set_all_channels(COLOR_CUADRADO_R, COLOR_CUADRADO_G, COLOR_CUADRADO_B);
     image_drawer draw(imagen);
     draw.pen_color(0, 0, 0);
     for (int i = 0; i <= this->imageH / (TABLERO_TAMANIO_CUADRADO + 2); i++)
@@ -73,9 +72,9 @@ void ExportadorTablero::dibujarEspia(bitmap_image& image, unsigned int x, unsign
 
     image_drawer draw(image);
 
-    draw.pen_color(COLOR_ESPIA.R,
-                   COLOR_ESPIA.G,
-                   COLOR_ESPIA.B);
+    draw.pen_color(COLOR_ESPIA_R,
+                   COLOR_ESPIA_G,
+                   COLOR_ESPIA_B);
 
     draw.pen_width(1);
 
@@ -94,8 +93,8 @@ void ExportadorTablero::dibujarMina(bitmap_image& image, unsigned int x, unsigne
 
     image_drawer draw(image);
 
-    draw.pen_color(COLOR_MINA.R, COLOR_MINA.G, COLOR_MINA.B);
-    
+    draw.pen_color(COLOR_MINA_R, COLOR_MINA_G, COLOR_MINA_B);
+
     draw.pen_width(2);
     draw.circle((x + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - TABLERO_TAMANIO_CUADRADO / 2 - 1, // El -1 es por la forma que redondea c++
                 (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - TABLERO_TAMANIO_CUADRADO / 2 - 1, // "
@@ -106,9 +105,9 @@ void ExportadorTablero::dibujarCruz(bitmap_image& image, unsigned int x, unsigne
 {
     image_drawer draw(image);
 
-    draw.pen_color(COLOR_CASILLA_INACTIVA.R,
-                   COLOR_CASILLA_INACTIVA.G,
-                   COLOR_CASILLA_INACTIVA.B);
+    draw.pen_color(COLOR_CASILLA_INACTIVA_R,
+                   COLOR_CASILLA_INACTIVA_G,
+                   COLOR_CASILLA_INACTIVA_B);
     draw.pen_width(2);
 
     draw.line_segment(
@@ -157,7 +156,7 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
             {
                 this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1, true);
             }
-            
+
 
             if (celdaActual->hayMinaEnLaCasilla() && celdaActual->tieneMina(jugador))
             {
@@ -182,3 +181,4 @@ void ExportadorTablero::exportarTablero(Tablero* tablero, Jugador* jugador)
         exportarPisoTablero(tablero, jugador, i);
     }
 }
+
