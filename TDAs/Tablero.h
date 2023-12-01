@@ -269,12 +269,12 @@ class Tablero {
 		void moverTesoro(Jugador *ptrJugador){
 			Tesoro* ptrTesoro = this->obtenerUnTesoro(ptrJugador);
 			if (ptrTesoro != NULL){
-				cout << "Tiene tesoro en: " << ptrTesoro->getCoordenadaX() << "-"<< ptrTesoro->getCoordenadaY() <<"-"<< ptrTesoro->getCoordenadaZ() << "-" << endl;
+				cout << "Jugador "<< ptrJugador->getId()<<": Tiene tesoro en: " << ptrTesoro->getCoordenadaX() << "-"<< ptrTesoro->getCoordenadaY() <<"-"<< ptrTesoro->getCoordenadaZ() << endl;
 				unsigned int nuevaCoordenadaX; unsigned int nuevaCoordenadaY; unsigned int nuevaCoordenadaZ;
-				cout << "Ingrese nueva coordenadaZ: "; cin >> nuevaCoordenadaZ;
+				cout << "Jugador "<< ptrJugador->getId()<< ": Ingrese nueva coordenadaZ: "; cin >> nuevaCoordenadaZ;
 				this->mostrarPiso(nuevaCoordenadaZ);
-				cout << "Ingrese nueva coordenadaX: "; cin >> nuevaCoordenadaX;
-				cout << "Ingrese nueva coordenadaY: "; cin >> nuevaCoordenadaY;
+				cout << "Jugador "<< ptrJugador->getId() << ": Ingrese nueva coordenadaX: "; cin >> nuevaCoordenadaX;
+				cout << "Jugador "<< ptrJugador->getId() << ": Ingrese nueva coordenadaY: "; cin >> nuevaCoordenadaY;
 				Celda* ptrNuevaCelda = this->obtenerPtrCelda(nuevaCoordenadaX, nuevaCoordenadaY, nuevaCoordenadaZ);
 				if (ptrNuevaCelda->getEstado() == CELDA_ACTIVA){
 					ptrTesoro->actualizarCoordenadas(nuevaCoordenadaX, nuevaCoordenadaY, nuevaCoordenadaZ);
