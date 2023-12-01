@@ -9,7 +9,7 @@ enum TipoDeCarta{
     RADAR,
     PARTIR_TESORO,
     ROMPER_BLINDAJE,
-    TESORO_EN_PELIGRO,
+    SALTAR_PROXIMO_TURNO,
     TRIPLE_MINA
 };
 
@@ -19,25 +19,25 @@ private:
     TipoDeCarta carta;
 
 public:
-     
+
     /**
-    * pre:
-    * post:
+    * Pre: -
+    * Post: Crea una instancia de carta cuyo tipo es al azar
     */
     Carta(){
-        int limiteInferior = 0;  
-        int limiteSuperior = 5;                                       
+        int limiteInferior = 0;
+        int limiteSuperior = 5;
         srand(time(NULL));
         this->carta = TipoDeCarta(limiteInferior + rand()%(limiteSuperior +1 - limiteInferior));
     }
-    
+
 
     virtual ~Carta(){}
 
     TipoDeCarta getTipoDeCarta(){
         return this->carta;
     }
- 
+
 };
 
 #endif
