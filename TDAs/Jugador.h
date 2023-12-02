@@ -68,6 +68,15 @@ class Jugador {
 			}
 		}
 
+        /*
+         * Pre: -
+         * Post: Devuelve un puntero a la mano del jugador
+         */
+        ManoIndividual* getManoJugador()
+        {
+            return this->manoJugador;
+        }
+
         virtual ~Jugador()
         {
             delete this->manoJugador;
