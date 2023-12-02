@@ -31,6 +31,11 @@ public:
         this->carta = TipoDeCarta(limiteInferior + rand()%(limiteSuperior +1 - limiteInferior));
     }
 
+    void printTipoDeCarta(){
+        std::string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Tesoro en Peligro","Triple Mina"};
+        std::cout<<"Esta carta es: " << nombresCartas[this->getTipoDeCarta()] << std::endl;
+    }
+
 
     virtual ~Carta(){}
 
