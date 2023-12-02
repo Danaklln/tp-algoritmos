@@ -65,7 +65,7 @@ public:
      * pre: -
      * post: devuelve si la carta esta en el mazo individual.
     */
-    void getCartasGuardadas(){
+    void printCartasGuardadas(){
         std::string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Tesoro en Peligro","Triple Mina"};
         std::cout<<"Las cartas que guardaste son: "<<std::endl;
         this->cartasGuardadas->iniciarCursor();
