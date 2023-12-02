@@ -1,10 +1,10 @@
-#ifndef MAZOINDIVIDUAL_H_
-#define MAZOINDIVIDUAL_H_
+#ifndef MANOINDIVIDUAL_H_
+#define MANOINDIVIDUAL_H_
 #include "Carta.h"
 #include <iostream>
 #include "Lista.h"
 
-class MazoIndividual{
+class ManoIndividual{
 
 private:
     Lista<Carta*>* cartasGuardadas;
