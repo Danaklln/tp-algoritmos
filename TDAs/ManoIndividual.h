@@ -12,12 +12,12 @@ private:
 
 
 public:
-    
+
     /**
      * pre: -
      * post: crea el mazo.
     */
-    ManoDelJugador(){
+    ManoIndividual(){
         this->cartasGuardadas = new Lista<Carta*>();
     }
 
@@ -25,7 +25,7 @@ public:
      * pre: -
      * post: elimina los elementos.
     */
-    virtual ~ManoDelJugador(){
+    virtual ~ManoIndividual(){
         delete this->cartasGuardadas;
     }
 
@@ -70,7 +70,7 @@ public:
         std::cout<<"Las cartas que guardaste son: "<<std::endl;
         this->cartasGuardadas->iniciarCursor();
         while(this->cartasGuardadas->avanzarCursor()){
-            std::cout<< nombresCartas[cartasGuardadas->obtenerCursor()->getTipoDeCarta()]<<std::endl;   
+            std::cout<< nombresCartas[cartasGuardadas->obtenerCursor()->getTipoDeCarta()]<<std::endl;
         }
     }
 

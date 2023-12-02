@@ -1,21 +1,21 @@
 #ifndef JUGADOR_H_
 #define JUGADOR_H_
 
+#include "./ManoIndividual.h"
+
 enum EstadoJugador{
     JUGADOR_ELIMINADO,
     JUGADOR_ACTIVO,
 	JUGADOR_PERDIOTURNO
 };
 
-class Jugador{
-
+class Jugador {
     private:
-
         unsigned int id;
     	EstadoJugador estado;
+        ManoIndividual* manoJugador;
 
     public:
-
 		/*
 		* Pre: -
 		* Post: Inicializa un jugador con el id proporcionado como parámetro.
@@ -23,6 +23,7 @@ class Jugador{
         Jugador(unsigned int id){
 			this->id = id;
 			this->estado = JUGADOR_ACTIVO;
+            this->manoJugador = new ManoIndividual();
 		}
 
 		/*
@@ -66,6 +67,12 @@ class Jugador{
 				this->estado = JUGADOR_ACTIVO;
 			}
 		}
+
+        virtual ~Jugador()
+        {
+            delete this->manoJugador;
+        }
 };
 
 #endif /* JUGADOR_H_ */
+
