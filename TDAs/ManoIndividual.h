@@ -93,5 +93,9 @@ public:
         }
     }
 
+    Carta * getCartaSacada(){
+        return this->cartaSacada;
+    }
+
 };
 #endif
