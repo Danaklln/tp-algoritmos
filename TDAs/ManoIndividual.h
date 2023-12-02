@@ -81,5 +81,17 @@ public:
         }
     }
 
+    Carta * getCarta(unsigned int numero){
+        if(numero < 0 && numero > 5){
+            throw "el numero no puede ser mayor a 5";
+        }
+        this->cartasGuardadas->iniciarCursor();
+        while(this->cartasGuardadas->avanzarCursor()){
+            if(this->cartasGuardadas->obtenerCursor()->getTipoDeCarta() == numero){
+                return cartasGuardadas->obtenerCursor();
+            }
+        }
+    }
+
 };
 #endif
