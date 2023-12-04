@@ -10,9 +10,9 @@
 template <typename T>
 string NumberToString(T pNumber)
 {
- ostringstream oOStrStream;
- oOStrStream << pNumber;
- return oOStrStream.str();
+    ostringstream oOStrStream;
+    oOStrStream << pNumber;
+    return oOStrStream.str();
 }
 
 ExportadorTablero::ExportadorTablero(Tablero* tablero)
@@ -23,7 +23,7 @@ ExportadorTablero::ExportadorTablero(Tablero* tablero)
     }
 
     uint tableroX = tablero->getDimensionX(),
-         tableroY = tablero->getDimensionY();
+    tableroY = tablero->getDimensionY();
 
     this->imageW = tableroX * (TABLERO_TAMANIO_CUADRADO + 2);
     this->imageH = tableroY * (TABLERO_TAMANIO_CUADRADO + 2);
@@ -127,6 +127,11 @@ void ExportadorTablero::dibujarCruz(bitmap_image& image, unsigned int x, unsigne
 
 void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, uint piso)
 {
+    if (!tablero || !jugador || !piso || piso > this->cantPisos)
+    {
+        throw "[ERROR] Parametros invalidos";
+    }
+
     bitmap_image imagenAExportar(this->imageW + 1, this->imageH + 1);
     dibujarGrilla(imagenAExportar);
     Lista<Lista<Celda*>*>* pisoActual = tablero->obtenerPiso(piso);
@@ -173,9 +178,13 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
     imagenAExportar.save_image("Tablero_piso_" + NumberToString(piso) + ".bmp");
 }
 
-
 void ExportadorTablero::exportarTablero(Tablero* tablero, Jugador* jugador)
 {
+    if (!tablero || !jugador)
+    {
+        throw "[ERROR] Parametros invalidos";
+    }
+
     for (int i = 1; i <= this->cantPisos; i++)
     {
         exportarPisoTablero(tablero, jugador, i);
