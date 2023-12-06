@@ -9,24 +9,8 @@ int main() {
     cout << "Ingrese la cantidad de jugadores" << endl;
     cin >> cantidadDeJugadores;
 	Juego* ptrjuego = new Juego(cantidadDeJugadores, dimensionX, dimensionY, dimensionZ);
-
-	// TesoroBinario* instanciaDeJuego = new TesoroBinario(); Crear instancia con los valores que ingreso el usuraio
-    //ExportadorTablero* exportadorTablero = new ExportadorTablero(instanciaDeJuego->obtenerTablero());
 	ptrjuego->iniciarJuego(numeroDeTesorosPorJugador);
 	ptrjuego->jugarJuego();
-	// Pedirle opciones al usuario.
-        //  Poner espia
-        //  Sacar carta
-        //     Usar carta
-        //
-
-        // Para exportar el tablero, se debe hacer
-        
-        // JUGADOR TERMINA SU TURNO ///IRIA EN JUEGO
-        /*
-        *    Es importante que primero termine el turno y luego se exporte, de esa manera se reflejan los cambios correctamente para el proximo jugador
-        */
-        //exportadorTablero->exportarTablero(instanciaDeJuego->obtenerTablero(), instanciaDeJuego->obtenerTurnoActual());
 	delete ptrjuego;
 	return 0;
 }

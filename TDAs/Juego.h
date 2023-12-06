@@ -15,13 +15,11 @@ using namespace std;
 class Juego{
 
 	private:
-
 		Lista<Jugador*>* ptrListPtrJugador;
 		Tablero* ptrtablero;
 		ExportadorTablero * imagen;
 
 	public:
-
 		/*
 		* Pre: Recibe dimenciones de tablero y numero de jugadores, siendo todo mayor a 0.
 		* Post: Inicializa un juego con los datos dados.
@@ -36,7 +34,6 @@ class Juego{
 
 
 			this->imagen = new ExportadorTablero(this->ptrtablero);
-
 		}
 
 		/*
@@ -108,15 +105,15 @@ class Juego{
 				cout << "Jugador " << idJugador << ": Ingrese coordenada Z de nueva mina: ";
 				cin >> coordenadaZ;
 				//this->ptrtablero->mostrarPiso(coordenadaZ);
-				cout << "Jugador " << idJugador << ": ingrese coordenada X de nueva mina: "; 
+				cout << "Jugador " << idJugador << ": ingrese coordenada X de nueva mina: ";
 				cin >> coordenadaX;
-				cout << "Jugador " << idJugador << ": ingrese coordenada Y de nueva mina: "; 
+				cout << "Jugador " << idJugador << ": ingrese coordenada Y de nueva mina: ";
 				cin >> coordenadaY;
 				this->ptrtablero->agregarNuevaMina(3, ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
 				this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 			}
 		}
-		
+
 		/*
 		* Pre: Recibe un puntero a jugador.
 		* Post: Agrega espia en tablero segun lo ingresado.
@@ -128,9 +125,9 @@ class Juego{
 					cout << "turno de Jugador " << idJugador << ": Ingrese coordenada Z de nuevo espia: ";
 					cin >> coordenadaZ;
 					//this->ptrtablero->mostrarPiso(coordenadaZ);
-					cout << "Jugador " << idJugador << ": ingrese coordenada X de nuevo espia: "; 
+					cout << "Jugador " << idJugador << ": ingrese coordenada X de nuevo espia: ";
 					cin >> coordenadaX;
-					cout << "Jugador " << idJugador << ": ingrese coordenada Y de nuevo espia: "; 
+					cout << "Jugador " << idJugador << ": ingrese coordenada Y de nuevo espia: ";
 					cin >> coordenadaY;
 					this->ptrtablero->agregarNuevoEspia( ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
 					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
@@ -163,7 +160,7 @@ class Juego{
 				this->ingresarNuevoEspia(ptrJugador);
 				this->realizarMovientoTesoro(ptrJugador);
 				ptrJugador->reactivarJugador();
-			}	
+			}
 		}
 
 		/*
@@ -173,12 +170,12 @@ class Juego{
 		void ponerUnTesoroInicial(Jugador* ptrJugador, unsigned int numeroDeTesoro){
 			unsigned int coordenadaX, coordenadaY, coordenadaZ;
 			unsigned int idJugador = ptrJugador->getId();
-			cout << "Jugador " << idJugador << ": ingrese coordenada Z de tesoro " << numeroDeTesoro << ": "; 
+			cout << "Jugador " << idJugador << ": ingrese coordenada Z de tesoro " << numeroDeTesoro << ": ";
 			cin >> coordenadaZ;
 			//this->ptrtablero->mostrarPiso(coordenadaZ);
-			cout << "Jugador " << idJugador << ": ingrese coordenada X de tesoro " << numeroDeTesoro << ": "; 
+			cout << "Jugador " << idJugador << ": ingrese coordenada X de tesoro " << numeroDeTesoro << ": ";
 			cin >> coordenadaX;
-			cout << "Jugador " << idJugador << ": ingrese coordenada Y de tesoro " << numeroDeTesoro << ": "; 
+			cout << "Jugador " << idJugador << ": ingrese coordenada Y de tesoro " << numeroDeTesoro << ": ";
 			cin >> coordenadaY;
 			this->ptrtablero->agregarNuevoTesoro(ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
 			this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
@@ -197,7 +194,7 @@ class Juego{
 				numeroDeTesoro++;
 			}
 		}
-	
+
 
 		/*
 		* Pre: Recibe numero de tesoros de cada jugador mayor a 0.
