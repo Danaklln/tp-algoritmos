@@ -1,11 +1,5 @@
+#include "./TDAs/Juego.h"
 #include <iostream>
-#include "Lista.h"
-#include "Espia.h"
-#include "Mina.h"
-#include "Tesoro.h"
-#include "Celda.h"
-#include "Tablero.h"
-#include "Juego.h"
 using namespace std;
 
 int main() {

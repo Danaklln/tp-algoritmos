@@ -8,6 +8,7 @@
 #include "Tesoro.h"
 #include "Celda.h"
 #include "Tablero.h"
+#include "ExportadorTablero.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ class Juego{
 
 		Lista<Jugador*>* ptrListPtrJugador;
 		Tablero* ptrtablero;
+		ExportadorTablero * imagen;
 
 	public:
 
@@ -31,6 +33,10 @@ class Juego{
 				this->ptrListPtrJugador->agregar(ptrJugador);
 			}
 			this->ptrtablero = new Tablero(dimensionX, dimensionY, dimensionZ, this->ptrListPtrJugador->obtener(1));
+
+
+			this->imagen = new ExportadorTablero(this->ptrtablero);
+
 		}
 
 		/*
@@ -55,7 +61,7 @@ class Juego{
 
 		/*
 		* Pre: -
-		* Post: Devuelve true si alguien gano el juego.
+		* Post: Devuelve el jugador que gano el juego.
 		*/
 		Jugador* obtenerGanador(){
 			Lista<Jugador*>* ptrListPtrJugador = this->ptrListPtrJugador;
@@ -101,12 +107,13 @@ class Juego{
 				unsigned int coordenadaX, coordenadaY, coordenadaZ;
 				cout << "Jugador " << idJugador << ": Ingrese coordenada Z de nueva mina: ";
 				cin >> coordenadaZ;
-				this->ptrtablero->mostrarPiso(coordenadaZ);
+				//this->ptrtablero->mostrarPiso(coordenadaZ);
 				cout << "Jugador " << idJugador << ": ingrese coordenada X de nueva mina: "; 
 				cin >> coordenadaX;
 				cout << "Jugador " << idJugador << ": ingrese coordenada Y de nueva mina: "; 
 				cin >> coordenadaY;
 				this->ptrtablero->agregarNuevaMina(3, ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
+				this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 			}
 		}
 		
@@ -120,12 +127,13 @@ class Juego{
 					unsigned int coordenadaX, coordenadaY, coordenadaZ;
 					cout << "turno de Jugador " << idJugador << ": Ingrese coordenada Z de nuevo espia: ";
 					cin >> coordenadaZ;
-					this->ptrtablero->mostrarPiso(coordenadaZ);
+					//this->ptrtablero->mostrarPiso(coordenadaZ);
 					cout << "Jugador " << idJugador << ": ingrese coordenada X de nuevo espia: "; 
 					cin >> coordenadaX;
 					cout << "Jugador " << idJugador << ": ingrese coordenada Y de nuevo espia: "; 
 					cin >> coordenadaY;
 					this->ptrtablero->agregarNuevoEspia( ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 			}
 		}
 
@@ -136,103 +144,8 @@ class Juego{
 		void realizarMovientoTesoro(Jugador* ptrJugador){
 			if (ptrJugador->getEstado() == JUGADOR_ACTIVO){
 					this->ptrtablero->moverTesoro(ptrJugador);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 				}
-		}
-
-		/*
-		* Pre: Recibe un puntero a jugador.
-		* Post: juega la carta sacada.
-		*/
-		void jugarCartaN(Jugador* ptrJugador,unsigned int TipoDeCarta){
-			switch (TipoDeCarta)
-			{
-			case 0:
-				unsigned int coordenadaX, coordenadaY, coordenadaZ;
-				cout << "ingrese coordenada Z para blindar"; 
-				cin >> coordenadaZ;
-				this->ptrtablero->mostrarPiso(coordenadaZ);
-				cout << "ingrese coordenada X para blindar"; 
-				cin >> coordenadaX;
-				cout << "ingrese coordenada Y para blindar"; 
-				cin >> coordenadaY;
-				this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->blindarTesoros(ptrJugador, 3);
-				break;
-
-			case 1:
-				unsigned int coordenadaX, coordenadaY, coordenadaZ;
-				cout << "ingrese coordenada Z para Radar"; 
-				cin >> coordenadaZ;
-				this->ptrtablero->mostrarPiso(coordenadaZ);
-				cout << "ingrese coordenada X para radar"; 
-				cin >> coordenadaX;
-				cout << "ingrese coordenada Y para radar"; 
-				cin >> coordenadaY;
-				this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				this->ptrtablero->obtenerPtrCelda(coordenadaX+2, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				this->ptrtablero->obtenerPtrCelda(coordenadaX-2, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+2, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-2, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-				break;
-			case 2:
-				this->ponerUnTesoroInicial(ptrJugador, 5);
-				break;
-			case 3:
-				unsigned int coordenadaX, coordenadaY, coordenadaZ;
-				cout << "ingrese coordenada Z para Radar"; 
-				cin >> coordenadaZ;
-				this->ptrtablero->mostrarPiso(coordenadaZ);
-				cout << "ingrese coordenada X para radar"; 
-				cin >> coordenadaX;
-				cout << "ingrese coordenada Y para radar"; 
-				cin >> coordenadaY;
-				this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->sacarBlindaje();
-				break;
-			case 4:
-				this->ingresarNuevoEspia(ptrJugador);
-				this->ingresarNuevoEspia(ptrJugador);
-				this->ingresarNuevoEspia(ptrJugador);
-				break;
-			case 5:
-				this->ingresarNuevaMina(ptrJugador);this->ingresarNuevaMina(ptrJugador);this->ingresarNuevaMina(ptrJugador);
-				break;
-		}
-
-		/*
-		* Pre: Recibe un puntero a jugador.
-		* Post: juega la carta sacada.
-		*/
-		void jugarCartaSacada(Jugador* ptrJugador){
-			this->jugarcartaN(ptrJugador,ptrJugador->getManoJugador()->getCartaSacada()->getTipoDeCarta());
-		}
-
-		/*
-		* Pre: Recibe un puntero a jugador.
-		* Post: saca nueva carta del mazo y decide si guardar o jugar.
-		*/
-		void accionarCarta(Jugador* ptrJugador){
-			ManoIndividual* manoJugador = ptrJugador->getManoJugador();
-			manoJugador->sacarCarta();
-			unsigned int jugarOGuardar;
-			cout << "ingrese Guardar la carta 0, Jugar la carta 1" << endl;
-			cin >> jugarOGuardar;
-			switch (jugarOGuardar){
-			case 0:
-				this->jugarCartaSacada(ptrJugador);
-				break;
-			case 1:
-				manoJugador->guardarCarta();
-				manoJugador->getCartasGuardadas();
-				unsigned int tipoJugar;
-				cout << "ingrese TIPO carta del 0 al 5 :" << endl;
-				cin >> tipoJugar;
-				Carta* carta =  manoJugador->getCarta(tipoJugar);
-				this->jugarcartaN(carta->getTipoDeCarta());
-				break;
-			}
 		}
 
 		/*
@@ -242,11 +155,10 @@ class Juego{
 		void jugarJuegadores(){
 			Lista<Jugador*>* ptrListPtrJugador = this->ptrListPtrJugador;
 			ptrListPtrJugador->iniciarCursor();
-			while ((ptrListPtrJugador->avanzarCursor())){ 
+			while ((ptrListPtrJugador->avanzarCursor()) ){ //&& (!this->juegoGanado()) NOOO REINICIA CURSOR SAINCE ES MISMA LISTA
 				Jugador* ptrJugador = ptrListPtrJugador->obtenerCursor();
-				this->ptrtablero->pasarTurnoTablero(ptrJugador);
+				this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 				this->eliminarJugador(ptrJugador);
-				this->accionarCarta(ptrJugador);
 				this->ingresarNuevaMina(ptrJugador);
 				this->ingresarNuevoEspia(ptrJugador);
 				this->realizarMovientoTesoro(ptrJugador);
@@ -263,12 +175,13 @@ class Juego{
 			unsigned int idJugador = ptrJugador->getId();
 			cout << "Jugador " << idJugador << ": ingrese coordenada Z de tesoro " << numeroDeTesoro << ": "; 
 			cin >> coordenadaZ;
-			this->ptrtablero->mostrarPiso(coordenadaZ);
+			//this->ptrtablero->mostrarPiso(coordenadaZ);
 			cout << "Jugador " << idJugador << ": ingrese coordenada X de tesoro " << numeroDeTesoro << ": "; 
 			cin >> coordenadaX;
 			cout << "Jugador " << idJugador << ": ingrese coordenada Y de tesoro " << numeroDeTesoro << ": "; 
 			cin >> coordenadaY;
 			this->ptrtablero->agregarNuevoTesoro(ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
+			this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 		}
 
 		/*
@@ -276,8 +189,8 @@ class Juego{
 		* Post: Pide a cada jugador que ingrese sus tesoros totales.
 		*/
 		void ponerTesorosIniciales(Jugador* ptrJugador, unsigned int numeroDeTesorosPorJugador){
-			this->ptrtablero->pasarTurnoTablero(ptrJugador);
 			unsigned int numeroDeTesoro = 1;
+			this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 			cout << "Jugador " << ptrJugador->getId() << ": ingresara sus " << numeroDeTesorosPorJugador << " tesoros" << endl;
 			while (numeroDeTesoro <= numeroDeTesorosPorJugador){
 				this->ponerUnTesoroInicial(ptrJugador, numeroDeTesoro);
@@ -292,10 +205,15 @@ class Juego{
 		*/
 		void iniciarJuego(unsigned int numeroDeTesorosPorJugador){
 			Lista<Jugador*>* ptrListPtrJugador = this->ptrListPtrJugador;
+			string aux;
+
+
 			ptrListPtrJugador->iniciarCursor();
 			while (ptrListPtrJugador->avanzarCursor()){
 				Jugador* ptrJugador = ptrListPtrJugador->obtenerCursor();
 				this->ponerTesorosIniciales(ptrJugador, numeroDeTesorosPorJugador);
+				cout << "Ingrese cualquier caracter para continuar: " << endl;
+				cin >> aux;
 			}
 		}
 
@@ -324,7 +242,6 @@ class Juego{
 			delete this->ptrListPtrJugador;
 			delete this->ptrtablero;
 		}
-		
 };
 
 #endif /* JUEGO_H_ */
