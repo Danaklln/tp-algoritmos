@@ -204,6 +204,15 @@ public:
     return obtenerTesoro(ptrJugador, 1);
   }
 
+  void aplicarRadar(Jugador* ptrJugador){
+	  Tesoro * tesoro = obtenerTesoro(ptrJugador, 1);
+	  if (tesoro){
+		  tesoro->setVisibilidad(TESORO_REVELADO);
+		  tesoro->setRevelador(ptrJugador);
+
+	  }
+  }
+
   /*
     * Pre: Recibe un puntero a un jugador.
     * Post: Devuelve true si hay algun objeto contrario en esta celda.
