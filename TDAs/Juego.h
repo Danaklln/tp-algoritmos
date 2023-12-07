@@ -306,13 +306,15 @@ class Juego{
 				cout << "6 - No jugar carta" << endl;
 				cout << "ingrese TIPO carta del 0 al 5 :" << endl;
 				cin >> tipoJugar;
-				while(!manoJugador->verificarCartaEnMazo((TipoDeCarta(tipoJugar)))){
+				while(tipoJugar != 6 && !manoJugador->verificarCartaEnMazo((TipoDeCarta(tipoJugar)))){
 					cout << "No tienes esa carta en tu mano, por favor elige otra..." << endl;
 					cout << "ingrese TIPO carta del 0 al 5 :" << endl;
 					cin >> tipoJugar;
 				}
-				Carta* carta =  manoJugador->getCarta(tipoJugar);
-				this->jugarCartaN(ptrJugador, carta->getTipoDeCarta());
+				if(tipoJugar != 6){
+					Carta* carta =  manoJugador->getCarta(tipoJugar);
+					this->jugarCartaN(ptrJugador, carta->getTipoDeCarta());
+				}
 				break;
 			}
 		}
