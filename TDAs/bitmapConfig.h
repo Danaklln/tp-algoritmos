@@ -6,8 +6,8 @@
 const unsigned int TABLERO_TAMANIO_CUADRADO = 32;
 
 // Color cuadrados
-const unsigned short COLOR_CUADRADO_R = 30;
 const unsigned short COLOR_CUADRADO_G = 84;
+const unsigned short COLOR_CUADRADO_R = 30;
 const unsigned short COLOR_CUADRADO_B = 173;
 
 // Color lineas del tablero
@@ -19,6 +19,11 @@ const unsigned short COLOR_LINEAS_B = 255;
 const unsigned short COLOR_TESORO_PROPIO_R = 53;
 const unsigned short COLOR_TESORO_PROPIO_G = 255;
 const unsigned short COLOR_TESORO_PROPIO_B = 31;
+
+// Tesoro blindado
+const unsigned short COLOR_TESORO_BLINDADO_R = 0;
+const unsigned short COLOR_TESORO_BLINDADO_G = 110;
+const unsigned short COLOR_TESORO_BLINDADO_B = 255;
 
 // Color tesoro del rival
 const unsigned short COLOR_TESORO_RIVAL_R = 255;
