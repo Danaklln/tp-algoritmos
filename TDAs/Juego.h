@@ -330,7 +330,11 @@ class Juego{
 			ptrListPtrJugador->iniciarCursor();
 			while ((ptrListPtrJugador->avanzarCursor()) ){ //&& (!this->juegoGanado()) NOOO REINICIA CURSOR SAINCE ES MISMA LISTA
 				Jugador* ptrJugador = ptrListPtrJugador->obtenerCursor();
+				this->ptrtablero->pasarTurnoTablero(ptrJugador);
 				this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
+				if(ptrJugador->getEstado() == JUGADOR_ACTIVO){
+					std::cout << "Turno del jugador " << ptrJugador->getId() << "  --------------------" << std::endl;
+				}
 				this->eliminarJugador(ptrJugador);
 				this->accionarCarta(ptrJugador);
 				this->ingresarNuevaMina(ptrJugador);
