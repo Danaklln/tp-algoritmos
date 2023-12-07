@@ -72,12 +72,12 @@ void ExportadorTablero::dibujarGrilla(bitmap_image& imagen)
     imagen.set_all_channels(COLOR_CUADRADO_R, COLOR_CUADRADO_G, COLOR_CUADRADO_B);
     image_drawer draw(imagen);
     draw.pen_color(0, 0, 0);
-    for (int i = 0; i <= this->imageH / (TABLERO_TAMANIO_CUADRADO + 2); i++)
+    for (unsigned int i = 0; i <= this->imageH / (TABLERO_TAMANIO_CUADRADO + 2); i++)
     {
         draw.horiztonal_line_segment(0, this->imageW, i * (TABLERO_TAMANIO_CUADRADO + 2));
     }
 
-    for (int j = 0; j <= this->imageW / (TABLERO_TAMANIO_CUADRADO + 2); j++)
+    for (unsigned int j = 0; j <= this->imageW / (TABLERO_TAMANIO_CUADRADO + 2); j++)
     {
         draw.vertical_line_segment(0, this->imageH, j * (TABLERO_TAMANIO_CUADRADO + 2));
     }
@@ -200,7 +200,7 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 
 void ExportadorTablero::exportarTablero(Tablero* tablero, Jugador* jugador)
 {
-    for (int i = 1; i <= this->cantPisos; i++)
+    for (unsigned int i = 1; i <= this->cantPisos; i++)
     {
         exportarPisoTablero(tablero, jugador, i);
     }
