@@ -55,6 +55,13 @@ private:
      */
     void dibujarCruz(bitmap_image& image, unsigned int x, unsigned int y);
 
+    /*
+     * Pre: Se debe proporcionar un objeto bitmap_image valido y dos coordenadas > 0
+     * Post: Se modifica el objeto bitmap_image dibujando un tesoro con un color distintivo
+     * indicando que esta blindado
+     */
+    void dibujarTesoroBlindado(bitmap_image& image, unsigned int x, unsigned int y);
+
 public:
     /*
     * Pre: -

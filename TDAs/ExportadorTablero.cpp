@@ -1,6 +1,7 @@
 #include "ExportadorTablero.h"
 #include "Tablero.h"
 #include "Celda.h"
+#include "Tesoro.h"
 #include "bitmapConfig.h"
 #include "bitmap_image.hpp"
 #include <iostream>
@@ -30,6 +31,22 @@ ExportadorTablero::ExportadorTablero(Tablero* tablero)
     this->tableroX = tableroX;
     this->tableroY = tableroY;
     this->cantPisos = tablero->getDimensionZ();
+}
+
+void ExportadorTablero::dibujarTesoroBlindado(bitmap_image& image, unsigned int x, unsigned int y)
+{
+    image_drawer draw(image);
+
+    draw.pen_color(COLOR_TESORO_BLINDADO_R,
+                   COLOR_TESORO_BLINDADO_G,
+                   COLOR_TESORO_BLINDADO_B);
+    draw.pen_width(2);
+
+    draw.rectangle(x * (TABLERO_TAMANIO_CUADRADO + 2) + 3,
+                   y * (TABLERO_TAMANIO_CUADRADO + 2) + 3,
+                   (x + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - 2,
+                   (y + 1) * (TABLERO_TAMANIO_CUADRADO + 2) - 2
+                   );
 }
 
 void ExportadorTablero::dibujarTesoro(bitmap_image& image, unsigned int x, unsigned int y, bool esTesoroRival)
@@ -149,7 +166,14 @@ void ExportadorTablero::exportarPisoTablero(Tablero *tablero, Jugador* jugador, 
 
             if (celdaActual->tieneTesoro(jugador))
             {
-                this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1, false);
+                if (celdaActual->obtenerTesoroDeJugador(jugador)->getEstadoTesoro() == TESORO_BLINDADO)
+                {
+                  this->dibujarTesoroBlindado(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1);
+                }
+                else
+                {
+                  this->dibujarTesoro(imagenAExportar, celdaActual->getCoordenadaX() - 1, celdaActual->getCoordenadaY() - 1, false);
+                }
             }
 
             if (celdaActual->tieneTesoroRivalRevelado(jugador))
