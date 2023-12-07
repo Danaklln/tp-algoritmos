@@ -286,12 +286,19 @@ class Juego{
 			case 1:
 				manoJugador->guardarCarta();
 				manoJugador->printCartasGuardadas();
+				cout << " -------- " << endl;
 				unsigned int tipoJugar;
 				for(int i = 0; i < 6; i++){
 					cout << nombresCartas[i] << " - " << i << endl;
 				}
+				cout << "6 - No jugar carta" << endl;
 				cout << "ingrese TIPO carta del 0 al 5 :" << endl;
 				cin >> tipoJugar;
+				while(!manoJugador->verificarCartaEnMazo((TipoDeCarta(tipoJugar)))){
+					cout << "No tienes esa carta en tu mano, por favor elige otra..." << endl;
+					cout << "ingrese TIPO carta del 0 al 5 :" << endl;
+					cin >> tipoJugar;
+				}
 				Carta* carta =  manoJugador->getCarta(tipoJugar);
 				this->jugarCartaN(ptrJugador, carta->getTipoDeCarta());
 				break;

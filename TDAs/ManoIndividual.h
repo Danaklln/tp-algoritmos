@@ -62,6 +62,16 @@ public:
         return false;
     }
 
+    bool verificarCartaEnMazo(TipoDeCarta tipo){
+        this->cartasGuardadas->iniciarCursor();
+        while(this->cartasGuardadas->avanzarCursor()){
+             if(tipo == this->cartasGuardadas->obtenerCursor()->getTipoDeCarta()){
+                return true;
+           }
+       }
+       return false;
+    }
+
     /**
      * pre: -
      * post: devuelve si la carta esta en el mazo individual.
