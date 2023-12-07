@@ -174,7 +174,7 @@ class Juego{
 					cin >> coordenadaX;
 					cout << "ingrese coordenada Y para radar"; 
 					cin >> coordenadaY;
-					if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 0 && coordenadaY-1 >= 0){
+					if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 1 && coordenadaY-1 >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
@@ -184,50 +184,50 @@ class Juego{
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-					} else if(coordenadaX <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 0 && coordenadaY-1 >= 0){
+					} else if(coordenadaX <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 1 && coordenadaY-1 >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-					} else if(coordenadaX+1 <= dimensionX && coordenadaY <= dimensionY && coordenadaX-1 >= 0 && coordenadaY-1 >= 0){
+					} else if(coordenadaX+1 <= dimensionX && coordenadaY <= dimensionY && coordenadaX-1 >= 1 && coordenadaY-1 >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-					} else if(coordenadaX <= dimensionX && coordenadaY <= dimensionY && coordenadaX-1 >= 0 && coordenadaY-1 >= 0){
+					} else if(coordenadaX <= dimensionX && coordenadaY <= dimensionY && coordenadaX-1 >= 1 && coordenadaY-1 >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-					} else if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 0 && coordenadaY >= 0){
+					} else if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 1 && coordenadaY >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-					} else if(coordenadaX <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 0 && coordenadaY >= 0){
+					} else if(coordenadaX <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 1 && coordenadaY >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-					} else if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX >= 0 && coordenadaY-1 >= 0){
+					} else if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX >= 1 && coordenadaY-1 >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-					} else if(coordenadaX+1 <= dimensionX && coordenadaY <= dimensionY && coordenadaX >= 0 && coordenadaY-1 >= 0){
+					} else if(coordenadaX+1 <= dimensionX && coordenadaY <= dimensionY && coordenadaX >= 1 && coordenadaY-1 >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
-					} else if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX >= 0 && coordenadaY >= 0){
+					} else if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX >= 1 && coordenadaY >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
@@ -284,38 +284,39 @@ class Juego{
 		*/
 		void accionarCarta(Jugador* ptrJugador){
 			string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Triple Espia","Triple Mina"};
-
-			ManoIndividual* manoJugador = ptrJugador->getManoJugador();
-			manoJugador->sacarCarta();
-			manoJugador->printCartaSacada();
-			unsigned int jugarOGuardar;
-			cout << "ingrese 0 para jugar la carta / 1 Guardar la carta" << endl;
-			cin >> jugarOGuardar;
-			switch (jugarOGuardar){
-			case 0:
-				this->jugarCartaSacada(ptrJugador);
-				break;
-			case 1:
-				manoJugador->guardarCarta();
-				manoJugador->printCartasGuardadas();
-				cout << " -------- " << endl;
-				unsigned int tipoJugar;
-				for(int i = 0; i < 6; i++){
-					cout << nombresCartas[i] << " - " << i << endl;
-				}
-				cout << "6 - No jugar carta" << endl;
-				cout << "ingrese TIPO carta del 0 al 5 :" << endl;
-				cin >> tipoJugar;
-				while(tipoJugar != 6 && !manoJugador->verificarCartaEnMazo((TipoDeCarta(tipoJugar)))){
-					cout << "No tienes esa carta en tu mano, por favor elige otra..." << endl;
+			if(ptrJugador->getEstado() == JUGADOR_ACTIVO){
+				ManoIndividual* manoJugador = ptrJugador->getManoJugador();
+				manoJugador->sacarCarta();
+				manoJugador->printCartaSacada();
+				unsigned int jugarOGuardar;
+				cout << "ingrese 0 para jugar la carta / 1 Guardar la carta" << endl;
+				cin >> jugarOGuardar;
+				switch (jugarOGuardar){
+				case 0:
+					this->jugarCartaSacada(ptrJugador);
+					break;
+				case 1:
+					manoJugador->guardarCarta();
+					manoJugador->printCartasGuardadas();
+					cout << " -------- " << endl;
+					unsigned int tipoJugar;
+					for(int i = 0; i < 6; i++){
+						cout << nombresCartas[i] << " - " << i << endl;
+					}
+					cout << "6 - No jugar carta" << endl;
 					cout << "ingrese TIPO carta del 0 al 5 :" << endl;
 					cin >> tipoJugar;
+					while(tipoJugar != 6 && !manoJugador->verificarCartaEnMazo((TipoDeCarta(tipoJugar)))){
+						cout << "No tienes esa carta en tu mano, por favor elige otra..." << endl;
+						cout << "ingrese TIPO carta del 0 al 5 :" << endl;
+						cin >> tipoJugar;
+					}
+					if(tipoJugar != 6){
+						Carta* carta =  manoJugador->getCarta(tipoJugar);
+						this->jugarCartaN(ptrJugador, carta->getTipoDeCarta());
+					}
+					break;
 				}
-				if(tipoJugar != 6){
-					Carta* carta =  manoJugador->getCarta(tipoJugar);
-					this->jugarCartaN(ptrJugador, carta->getTipoDeCarta());
-				}
-				break;
 			}
 		}
 
