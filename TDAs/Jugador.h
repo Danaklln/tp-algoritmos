@@ -1,6 +1,8 @@
 #ifndef JUGADOR_H_
 #define JUGADOR_H_
 
+#include "./ManoIndividual.h"
+
 enum EstadoJugador{
     JUGADOR_ELIMINADO,
     JUGADOR_ACTIVO,
@@ -13,6 +15,7 @@ class Jugador{
 
         unsigned int id;
     	EstadoJugador estado;
+		ManoIndividual* manoJugador;
 
     public:
 
@@ -23,6 +26,7 @@ class Jugador{
         Jugador(unsigned int id){
 			this->id = id;
 			this->estado = JUGADOR_ACTIVO;
+			this->manoJugador = new ManoIndividual();
 		}
 
 		/*
@@ -66,6 +70,16 @@ class Jugador{
 				this->estado = JUGADOR_ACTIVO;
 			}
 		}
+
+		ManoIndividual* getManoJugador()
+        {
+            return this->manoJugador;
+        }
+
+        virtual ~Jugador()
+        {
+            delete this->manoJugador;
+        }
 };
 
 #endif /* JUGADOR_H_ */

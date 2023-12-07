@@ -146,6 +146,100 @@ class Juego{
 		}
 
 		/*
+		* Pre: Recibe un puntero a jugador valido.
+		* Post: juega la carta sacada.
+		*/
+		void jugarCartaN(Jugador* ptrJugador,unsigned int TipoDeCarta){
+			unsigned int coordenadaX, coordenadaY, coordenadaZ;
+			switch (TipoDeCarta){
+				case 0:
+					cout << "ingrese coordenada Z para blindar"; 
+					cin >> coordenadaZ;
+					this->ptrtablero->mostrarPiso(coordenadaZ);
+					cout << "ingrese coordenada X para blindar"; 
+					cin >> coordenadaX;
+					cout << "ingrese coordenada Y para blindar"; 
+					cin >> coordenadaY;
+					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->blindarTesoros(ptrJugador, 3);
+					break;
+
+				case 1:
+					cout << "ingrese coordenada Z para Radar"; 
+					cin >> coordenadaZ;
+					this->ptrtablero->mostrarPiso(coordenadaZ);
+					cout << "ingrese coordenada X para radar"; 
+					cin >> coordenadaX;
+					cout << "ingrese coordenada Y para radar"; 
+					cin >> coordenadaY;
+					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					this->ptrtablero->obtenerPtrCelda(coordenadaX+2, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					this->ptrtablero->obtenerPtrCelda(coordenadaX-1, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					this->ptrtablero->obtenerPtrCelda(coordenadaX-2, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+2, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY-2, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
+					break;
+				case 2:
+					this->ponerUnTesoroInicial(ptrJugador, 5);
+					break;
+				case 3:
+					cout << "ingrese coordenada Z para Radar"; 
+					cin >> coordenadaZ;
+					this->ptrtablero->mostrarPiso(coordenadaZ);
+					cout << "ingrese coordenada X para radar"; 
+					cin >> coordenadaX;
+					cout << "ingrese coordenada Y para radar"; 
+					cin >> coordenadaY;
+					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->sacarBlindaje();
+					break;
+				case 4:
+					this->ingresarNuevoEspia(ptrJugador);
+					this->ingresarNuevoEspia(ptrJugador);
+					this->ingresarNuevoEspia(ptrJugador);
+					break;
+				case 5:
+					this->ingresarNuevaMina(ptrJugador);this->ingresarNuevaMina(ptrJugador);this->ingresarNuevaMina(ptrJugador);
+					break;
+			}
+		}
+
+		/*
+		* Pre: Recibe un puntero a jugador.
+		* Post: juega la carta sacada.
+		*/
+		void jugarCartaSacada(Jugador* ptrJugador){
+			this->jugarCartaN(ptrJugador,ptrJugador->getManoJugador()->getCartaSacada()->getTipoDeCarta());
+		}
+
+		/*
+		* Pre: Recibe un puntero a jugador.
+		* Post: saca nueva carta del mazo y decide si guardar o jugar.
+		*/
+		void accionarCarta(Jugador* ptrJugador){
+			ManoIndividual* manoJugador = ptrJugador->getManoJugador();
+			manoJugador->sacarCarta();
+			unsigned int jugarOGuardar;
+			cout << "ingrese Guardar la carta 0, Jugar la carta 1" << endl;
+			cin >> jugarOGuardar;
+			switch (jugarOGuardar){
+			case 0:
+				this->jugarCartaSacada(ptrJugador);
+				break;
+			case 1:
+				manoJugador->guardarCarta();
+				manoJugador->printCartasGuardadas();
+				unsigned int tipoJugar;
+				cout << "ingrese TIPO carta del 0 al 5 :" << endl;
+				cin >> tipoJugar;
+				Carta* carta =  manoJugador->getCarta(tipoJugar);
+				this->jugarCartaN(ptrJugador, carta->getTipoDeCarta());
+				break;
+			}
+		}
+
+		/*
 		* Pre: -
 		* Post: juega el juego hasta que haya un ganador.
 		*/
@@ -156,6 +250,7 @@ class Juego{
 				Jugador* ptrJugador = ptrListPtrJugador->obtenerCursor();
 				this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 				this->eliminarJugador(ptrJugador);
+				this->accionarCarta(ptrJugador);
 				this->ingresarNuevaMina(ptrJugador);
 				this->ingresarNuevoEspia(ptrJugador);
 				this->realizarMovientoTesoro(ptrJugador);
