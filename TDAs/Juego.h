@@ -155,12 +155,12 @@ class Juego{
 				case 0:
 					cout << "ingrese coordenada Z para blindar"; 
 					cin >> coordenadaZ;
-					this->ptrtablero->mostrarPiso(coordenadaZ);
 					cout << "ingrese coordenada X para blindar"; 
 					cin >> coordenadaX;
 					cout << "ingrese coordenada Y para blindar"; 
 					cin >> coordenadaY;
 					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->blindarTesoros(ptrJugador, 3);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					break;
 
 				case 1:
@@ -233,27 +233,39 @@ class Juego{
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 					}
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					break;
 				case 2:
 					this->ponerUnTesoroInicial(ptrJugador, 5);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					break;
 				case 3:
-					cout << "ingrese coordenada Z para Radar"; 
+					cout << "ingrese coordenada Z para romper blindaje";
 					cin >> coordenadaZ;
-					this->ptrtablero->mostrarPiso(coordenadaZ);
-					cout << "ingrese coordenada X para radar"; 
+					cout << "ingrese coordenada X para romper blindaje";
 					cin >> coordenadaX;
-					cout << "ingrese coordenada Y para radar"; 
+					cout << "ingrese coordenada Y para romper blindaje";
 					cin >> coordenadaY;
-					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->sacarBlindaje();
+					if(this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)){
+						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->sacarBlindaje();
+					}
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					break;
 				case 4:
 					this->ingresarNuevoEspia(ptrJugador);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					this->ingresarNuevoEspia(ptrJugador);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					this->ingresarNuevoEspia(ptrJugador);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					break;
 				case 5:
-					this->ingresarNuevaMina(ptrJugador);this->ingresarNuevaMina(ptrJugador);this->ingresarNuevaMina(ptrJugador);
+					this->ingresarNuevaMina(ptrJugador);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
+					this->ingresarNuevaMina(ptrJugador);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
+					this->ingresarNuevaMina(ptrJugador);
+					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					break;
 			}
 		}
