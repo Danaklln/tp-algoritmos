@@ -30,14 +30,25 @@ public:
         this->carta = TipoDeCarta(limiteInferior + rand()%(limiteSuperior +1 - limiteInferior));
     }
 
+    /**
+    * pre: -
+    * post: imprime el tipo de carta
+    */
     void printTipoDeCarta(){
         std::string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Tesoro en Peligro","Triple Mina"};
         std::cout<<"Esta carta es: " << nombresCartas[this->getTipoDeCarta()] << std::endl;
     }
 
-
+    /**
+    * pre: -
+    * post: elimina los elementos
+    */
     virtual ~Carta(){}
 
+    /**
+    * pre: -
+    * post: devuelve la el tipo de la carta
+    */
     TipoDeCarta getTipoDeCarta(){
         return this->carta;
     }
