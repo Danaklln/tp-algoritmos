@@ -27,7 +27,6 @@ public:
     Carta(){
         int limiteInferior = 0;
         int limiteSuperior = 5;
-        srand(time(NULL));
         this->carta = TipoDeCarta(limiteInferior + rand()%(limiteSuperior +1 - limiteInferior));
     }
 
