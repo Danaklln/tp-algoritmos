@@ -259,8 +259,9 @@ public:
     while(tesorosEnCasilla->avanzarCursor())
     {
       Tesoro* tesoroActual = tesorosEnCasilla->obtenerCursor();
-      if (tesoroActual->getPropietario() != jugador && tesoroActual->getVisibilidad() == TESORO_REVELADO &&
-      tesoroActual->getRevelador() != jugador)
+      if (tesoroActual->getPropietario() != jugador &&
+      tesoroActual->getVisibilidad() == TESORO_REVELADO &&
+      tesoroActual->getRevelador() == jugador)
       {
         return true;
       }
