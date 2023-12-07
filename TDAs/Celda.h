@@ -8,8 +8,6 @@
 #include "Mina.h"
 #include "Tesoro.h"
 
-using namespace std;
-
 enum EstadoCelda{
   CELDA_INACTIVA,
   CELDA_ACTIVA
@@ -112,7 +110,7 @@ public:
   */
   void descubrioMina(Jugador* ptrJugador){
     if (this->tieneMinaContraria(ptrJugador)){
-      cout << "descubriste una mina!" << endl;
+      std::cout << "descubriste una mina!" << std::endl;
       ptrJugador->perderTurno();
       this->accionarMina();
     }
@@ -382,7 +380,7 @@ public:
         this->eliminarMina();
         this->eliminarEspia();
         this->eliminarTodosTesoros();
-        cout << "Mina exploto!" << endl;
+        std::cout << "Mina exploto!" << std::endl;
       }
     }
   }
@@ -439,7 +437,7 @@ public:
   */
   void addTesoro(Tesoro* nuevoPtrTesoro){
     if (obtenerTesoroContrario(nuevoPtrTesoro->getPropietario()) != NULL){
-      cout<< "Tesoro enemigo en celda:" << this->coordenadaX <<"-"<< this->coordenadaY <<"-"<<this->coordenadaZ <<endl;
+      std::cout<< "Tesoro enemigo en celda:" << this->coordenadaX <<"-"<< this->coordenadaY <<"-"<<this->coordenadaZ << std::endl;
     }
     this->ptrlistptrtesoro->agregar(nuevoPtrTesoro);
     this->descubrioMina(nuevoPtrTesoro->getPropietario());
@@ -534,8 +532,8 @@ public:
     * Pre: -
     * Post: Devuelve contenidos visibles por jugador actual de la celda.
   */
-  string visualizarCelda(){
-    string texto = "   ";
+  std::string visualizarCelda(){
+    std::string texto = "   ";
     if (this->estado == CELDA_INACTIVA){
       texto = "XXX";
     }

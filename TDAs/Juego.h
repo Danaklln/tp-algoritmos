@@ -10,8 +10,6 @@
 #include "Tablero.h"
 #include "ExportadorTablero.h"
 
-using namespace std;
-
 class Juego{
 
 	private:
@@ -102,13 +100,13 @@ class Juego{
 			unsigned int idJugador = ptrJugador->getId();
 			if (ptrJugador->getEstado() == JUGADOR_ACTIVO){
 				unsigned int coordenadaX, coordenadaY, coordenadaZ;
-				cout << "Jugador " << idJugador << ": Ingrese coordenada Z de nueva mina: ";
-				cin >> coordenadaZ;
+				std::cout << "Jugador " << idJugador << ": Ingrese coordenada Z de nueva mina: ";
+				std::cin >> coordenadaZ;
 				//this->ptrtablero->mostrarPiso(coordenadaZ);
-				cout << "Jugador " << idJugador << ": ingrese coordenada X de nueva mina: ";
-				cin >> coordenadaX;
-				cout << "Jugador " << idJugador << ": ingrese coordenada Y de nueva mina: ";
-				cin >> coordenadaY;
+				std::cout << "Jugador " << idJugador << ": ingrese coordenada X de nueva mina: ";
+				std::cin >> coordenadaX;
+				std::cout << "Jugador " << idJugador << ": ingrese coordenada Y de nueva mina: ";
+				std::cin >> coordenadaY;
 				this->ptrtablero->agregarNuevaMina(3, ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
 				this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 			}
@@ -122,13 +120,13 @@ class Juego{
 			unsigned int idJugador = ptrJugador->getId();
 			if (ptrJugador->getEstado() == JUGADOR_ACTIVO){
 					unsigned int coordenadaX, coordenadaY, coordenadaZ;
-					cout << "turno de Jugador " << idJugador << ": Ingrese coordenada Z de nuevo espia: ";
-					cin >> coordenadaZ;
+					std::cout << "turno de Jugador " << idJugador << ": Ingrese coordenada Z de nuevo espia: ";
+					std::cin >> coordenadaZ;
 					//this->ptrtablero->mostrarPiso(coordenadaZ);
-					cout << "Jugador " << idJugador << ": ingrese coordenada X de nuevo espia: ";
-					cin >> coordenadaX;
-					cout << "Jugador " << idJugador << ": ingrese coordenada Y de nuevo espia: ";
-					cin >> coordenadaY;
+					std::cout << "Jugador " << idJugador << ": ingrese coordenada X de nuevo espia: ";
+					std::cin >> coordenadaX;
+					std::cout << "Jugador " << idJugador << ": ingrese coordenada Y de nuevo espia: ";
+					std::cin >> coordenadaY;
 					this->ptrtablero->agregarNuevoEspia( ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
 					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 			}
@@ -153,12 +151,12 @@ class Juego{
 			unsigned int coordenadaX, coordenadaY, coordenadaZ;
 			switch (TipoDeCarta){
 				case 0:
-					cout << "ingrese coordenada Z para blindar"; 
-					cin >> coordenadaZ;
-					cout << "ingrese coordenada X para blindar"; 
-					cin >> coordenadaX;
-					cout << "ingrese coordenada Y para blindar"; 
-					cin >> coordenadaY;
+					std::cout << "ingrese coordenada Z para blindar";
+					std::cin >> coordenadaZ;
+					std::cout << "ingrese coordenada X para blindar";
+					std::cin >> coordenadaX;
+					std::cout << "ingrese coordenada Y para blindar";
+					std::cin >> coordenadaY;
 					this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->blindarTesoros(ptrJugador, 3);
 					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					break;
@@ -167,13 +165,13 @@ class Juego{
 					unsigned int dimensionX, dimensionY;
 					dimensionX = this->ptrtablero->getDimensionX();
 					dimensionY = this->ptrtablero->getDimensionY();
-					cout << "ingrese coordenada Z para Radar"; 
-					cin >> coordenadaZ;
+					std::cout << "ingrese coordenada Z para Radar";
+					std::cin >> coordenadaZ;
 					this->ptrtablero->mostrarPiso(coordenadaZ);
-					cout << "ingrese coordenada X para radar"; 
-					cin >> coordenadaX;
-					cout << "ingrese coordenada Y para radar"; 
-					cin >> coordenadaY;
+					std::cout << "ingrese coordenada X para radar";
+					std::cin >> coordenadaX;
+					std::cout << "ingrese coordenada Y para radar";
+					std::cin >> coordenadaY;
 					if(coordenadaX+1 <= dimensionX && coordenadaY+1 <= dimensionY && coordenadaX-1 >= 1 && coordenadaY-1 >= 1){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->aplicarRadar(ptrJugador);
 						this->ptrtablero->obtenerPtrCelda(coordenadaX+1, coordenadaY, coordenadaZ)->aplicarRadar(ptrJugador);
@@ -235,20 +233,20 @@ class Juego{
 					}
 					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					int aux;
-					cout << "Ingrese cualquier caracter para continuar: ";
-					cin >> aux;
+					std::cout << "Ingrese cualquier caracter para continuar: ";
+					std::cin >> aux;
 					break;
 				case 2:
 					this->ponerUnTesoroInicial(ptrJugador, 5);
 					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 					break;
 				case 3:
-					cout << "ingrese coordenada Z para romper blindaje";
-					cin >> coordenadaZ;
-					cout << "ingrese coordenada X para romper blindaje";
-					cin >> coordenadaX;
-					cout << "ingrese coordenada Y para romper blindaje";
-					cin >> coordenadaY;
+					std::cout << "ingrese coordenada Z para romper blindaje";
+					std::cin >> coordenadaZ;
+					std::cout << "ingrese coordenada X para romper blindaje";
+					std::cin >> coordenadaX;
+					std::cout << "ingrese coordenada Y para romper blindaje";
+					std::cin >> coordenadaY;
 					if(this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)){
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->sacarBlindaje();
 					}
@@ -286,14 +284,14 @@ class Juego{
 		* Post: saca nueva carta del mazo y decide si guardar o jugar.
 		*/
 		void accionarCarta(Jugador* ptrJugador){
-			string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Triple Espia","Triple Mina"};
+      std::string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Triple Espia","Triple Mina"};
 			if(ptrJugador->getEstado() == JUGADOR_ACTIVO){
 				ManoIndividual* manoJugador = ptrJugador->getManoJugador();
 				manoJugador->sacarCarta();
 				manoJugador->printCartaSacada();
 				unsigned int jugarOGuardar;
-				cout << "ingrese 0 para jugar la carta / 1 Guardar la carta" << endl;
-				cin >> jugarOGuardar;
+        std::cout << "ingrese 0 para jugar la carta / 1 Guardar la carta" << std::endl;
+				std::cin >> jugarOGuardar;
 				switch (jugarOGuardar){
 				case 0:
 					this->jugarCartaSacada(ptrJugador);
@@ -301,18 +299,18 @@ class Juego{
 				case 1:
 					manoJugador->guardarCarta();
 					manoJugador->printCartasGuardadas();
-					cout << " -------- " << endl;
+          std::cout << " -------- " << std::endl;
 					unsigned int tipoJugar;
 					for(int i = 0; i < 6; i++){
-						cout << nombresCartas[i] << " - " << i << endl;
+            std::cout << nombresCartas[i] << " - " << i << std::endl;
 					}
-					cout << "6 - No jugar carta" << endl;
-					cout << "ingrese TIPO carta del 0 al 5 :" << endl;
-					cin >> tipoJugar;
+          std::cout << "6 - No jugar carta" << std::endl;
+          std::cout << "ingrese TIPO carta del 0 al 5 :" << std::endl;
+					std::cin >> tipoJugar;
 					while(tipoJugar != 6 && !manoJugador->verificarCartaEnMazo((TipoDeCarta(tipoJugar)))){
-						cout << "No tienes esa carta en tu mano, por favor elige otra..." << endl;
-						cout << "ingrese TIPO carta del 0 al 5 :" << endl;
-						cin >> tipoJugar;
+            std::cout << "No tienes esa carta en tu mano, por favor elige otra..." << std::endl;
+            std::cout << "ingrese TIPO carta del 0 al 5 :" << std::endl;
+						std::cin >> tipoJugar;
 					}
 					if(tipoJugar != 6){
 						Carta* carta =  manoJugador->getCarta(tipoJugar);
@@ -349,13 +347,13 @@ class Juego{
 		void ponerUnTesoroInicial(Jugador* ptrJugador, unsigned int numeroDeTesoro){
 			unsigned int coordenadaX, coordenadaY, coordenadaZ;
 			unsigned int idJugador = ptrJugador->getId();
-			cout << "Jugador " << idJugador << ": ingrese coordenada Z de tesoro " << numeroDeTesoro << ": ";
-			cin >> coordenadaZ;
+      std::cout << "Jugador " << idJugador << ": ingrese coordenada Z de tesoro " << numeroDeTesoro << ": ";
+      std::cin >> coordenadaZ;
 			//this->ptrtablero->mostrarPiso(coordenadaZ);
-			cout << "Jugador " << idJugador << ": ingrese coordenada X de tesoro " << numeroDeTesoro << ": ";
-			cin >> coordenadaX;
-			cout << "Jugador " << idJugador << ": ingrese coordenada Y de tesoro " << numeroDeTesoro << ": ";
-			cin >> coordenadaY;
+      std::cout << "Jugador " << idJugador << ": ingrese coordenada X de tesoro " << numeroDeTesoro << ": ";
+			std::cin >> coordenadaX;
+      std::cout << "Jugador " << idJugador << ": ingrese coordenada Y de tesoro " << numeroDeTesoro << ": ";
+			std::cin >> coordenadaY;
 			this->ptrtablero->agregarNuevoTesoro(ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
 			this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
 		}
@@ -367,7 +365,7 @@ class Juego{
 		void ponerTesorosIniciales(Jugador* ptrJugador, unsigned int numeroDeTesorosPorJugador){
 			unsigned int numeroDeTesoro = 1;
 			this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
-			cout << "Jugador " << ptrJugador->getId() << ": ingresara sus " << numeroDeTesorosPorJugador << " tesoros" << endl;
+      std::cout << "Jugador " << ptrJugador->getId() << ": ingresara sus " << numeroDeTesorosPorJugador << " tesoros" << std::endl;
 			while (numeroDeTesoro <= numeroDeTesorosPorJugador){
 				this->ponerUnTesoroInicial(ptrJugador, numeroDeTesoro);
 				numeroDeTesoro++;
@@ -381,15 +379,15 @@ class Juego{
 		*/
 		void iniciarJuego(unsigned int numeroDeTesorosPorJugador){
 			Lista<Jugador*>* ptrListPtrJugador = this->ptrListPtrJugador;
-			string aux;
+      std::string aux;
 
 
 			ptrListPtrJugador->iniciarCursor();
 			while (ptrListPtrJugador->avanzarCursor()){
 				Jugador* ptrJugador = ptrListPtrJugador->obtenerCursor();
 				this->ponerTesorosIniciales(ptrJugador, numeroDeTesorosPorJugador);
-				cout << "Ingrese cualquier caracter para continuar: " << endl;
-				cin >> aux;
+        std::cout << "Ingrese cualquier caracter para continuar: " << std::endl;
+				std::cin >> aux;
 			}
 		}
 
@@ -402,7 +400,7 @@ class Juego{
 				this->jugarJuegadores();
 				this->eliminarJugadores();
 			}
-			cout << "Jugador " << this->obtenerGanador()->getId() << " gano.";
+      std::cout << "Jugador " << this->obtenerGanador()->getId() << " gano.";
 		}
 
 		/*

@@ -8,8 +8,6 @@
 #include "Tesoro.h"
 #include "Celda.h"
 
-using namespace std;
-
 /*
 * Un Tablero almacena punteros a celdas de según las dimensiones dadas.
 */
@@ -19,7 +17,7 @@ class Tablero {
 
 		Lista<Lista<Lista<Celda*>*>*>* ptrContenido;
 		Jugador* ptrJugadorActual;
-        unsigned int dimensionX; 
+        unsigned int dimensionX;
 		unsigned int dimensionY;
 		unsigned int dimensionZ;
 
@@ -52,7 +50,7 @@ class Tablero {
 
 		/*
 		* Pre: -
-		* Post: Devuelve puntero al contenido del Tablero. 
+		* Post: Devuelve puntero al contenido del Tablero.
 		*/
 		Lista<Lista<Lista<Celda*>*>*>* getContenido(){
 			return this->ptrContenido;
@@ -68,7 +66,7 @@ class Tablero {
 
 		/*
 		* Pre: Las posiciones X Y Z están entre 1 y dimensión X Y Z del Tablero.
-		* Post: Devuelve puntero a celda de la posición pedida. 
+		* Post: Devuelve puntero a celda de la posición pedida.
 		*/
 		Celda* obtenerPtrCelda(unsigned int posicionX, unsigned int posicionY, unsigned int posicionZ){
 			Lista<Lista<Celda*>*>* ptrlistptrlistdeptrcelda = this->ptrContenido->obtener(posicionZ);
@@ -78,7 +76,7 @@ class Tablero {
 
 		/*
 		* Pre: Recibe un puntero jugador.
-		* Post: Devuelve puntero a primer tesoro propio encontrado si no NULL. 
+		* Post: Devuelve puntero a primer tesoro propio encontrado si no NULL.
 		*/
 		Tesoro* obtenerUnTesoro(Jugador* ptrJugador){
 			Lista<Lista<Lista<Celda*>*>*>*  ptrlistptrlistptrlistdeptrcelda = this->ptrContenido;
@@ -100,9 +98,9 @@ class Tablero {
 			return NULL;
 		}
 
-		/* 
+		/*
 		* Pre: -
-		* Post: Muestra todo el contenido del Tablero por pantalla. 
+		* Post: Muestra todo el contenido del Tablero por pantalla.
 		*/
 		void mostrarTableroCompleto(){
 			Lista<Lista<Lista<Celda*>*>*>*  ptrlistptrlistptrlistdeptrcelda = this->ptrContenido;
@@ -122,13 +120,13 @@ class Tablero {
 				}
 				k++;
 			}
-		} 
+		}
 
 		/*
 		* Pre: Recibe un numero mayor a 1.
 		* Post: devuelve string ajustado para indicador de coordenada.
 		*/
-		string ajustarIndicadorCoordenada(unsigned int i){
+    std::string ajustarIndicadorCoordenada(unsigned int i){
 			if (i < 10){
 				return "  |";
 			}
@@ -147,7 +145,7 @@ class Tablero {
 			Lista<Lista<Celda*>*>* ptrlistptrlistdeptrcelda = this->obtenerPiso(coordenadaZ);
 			std::cout << "TableroXY | Z = " << coordenadaZ << ":" << std::endl<< "   |";
 			for (unsigned int i = 1; i <= ptrlistptrlistdeptrcelda->obtener(1)->contarElementos(); i++){
-					cout << i << this->ajustarIndicadorCoordenada(i);
+        std::cout << i << this->ajustarIndicadorCoordenada(i);
 			}
 			std::cout << std::endl;
 			ptrlistptrlistdeptrcelda->iniciarCursor();
@@ -155,7 +153,7 @@ class Tablero {
 			while (ptrlistptrlistdeptrcelda->avanzarCursor()){
 				Lista<Celda*>* ptrlistdeptrcelda = ptrlistptrlistdeptrcelda->obtenerCursor();
 				ptrlistdeptrcelda->iniciarCursor();
-				cout << j << this->ajustarIndicadorCoordenada(j);
+        std::cout << j << this->ajustarIndicadorCoordenada(j);
 				while (ptrlistdeptrcelda->avanzarCursor()){
 					std::cout <<  ptrlistdeptrcelda->obtenerCursor()->visualizarCelda() << "|";
 				}
@@ -166,7 +164,7 @@ class Tablero {
 
 		/*
 		* Pre: -
-		* Post: Devuelve el jugador actual del Tablero. 
+		* Post: Devuelve el jugador actual del Tablero.
 		*/
 		Jugador* getJugadorActual(){
 			return this->ptrJugadorActual;
@@ -174,7 +172,7 @@ class Tablero {
 
 		/*
 		* Pre: -
-		* Post: Devuelve la dimension X del Tablero. 
+		* Post: Devuelve la dimension X del Tablero.
 		*/
 		unsigned int getDimensionX(){
 			return this->dimensionX;
@@ -182,7 +180,7 @@ class Tablero {
 
 		/*
 		* Pre: -
-		* Post: Devuelve la dimension Y del Tablero. 
+		* Post: Devuelve la dimension Y del Tablero.
 		*/
 		unsigned int getDimensionY(){
 			return this->dimensionY;
@@ -190,7 +188,7 @@ class Tablero {
 
 		/*
 		* Pre: -
-		* Post: Devuelve la dimension Z del Tablero. 
+		* Post: Devuelve la dimension Z del Tablero.
 		*/
 		unsigned int getDimensionZ(){
 			return this->dimensionZ;
@@ -198,7 +196,7 @@ class Tablero {
 
 		/*
 		* Pre: Recibe puntero al jugador y las coordenadas X Y Z están en rango.
-		* Post: Crea nueva mina a nombre del jugador segun coordenadas dadas y devuelve true si la agrega. 
+		* Post: Crea nueva mina a nombre del jugador segun coordenadas dadas y devuelve true si la agrega.
 		*/
 		bool agregarNuevaMina(unsigned int poder, Jugador* ptrJugador, unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
 			Mina* ptrNuevaMina = new Mina(poder, ptrJugador);
@@ -226,7 +224,7 @@ class Tablero {
 
 		/*
 		* Pre: Recibe puntero al jugador y las coordenadas X Y Z están en rango.
-		* Post: Crea nuevo Tesoro del jugador segun coordenadas dadas y devuelve true si lo agrega. 
+		* Post: Crea nuevo Tesoro del jugador segun coordenadas dadas y devuelve true si lo agrega.
 		*/
 		bool agregarNuevoTesoro(Jugador* ptrJugador, unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
 			Tesoro* ptrNuevoTesoro = new Tesoro(ptrJugador, coordenadaX, coordenadaY, coordenadaZ);
@@ -240,7 +238,7 @@ class Tablero {
 
 		/*
 		* Pre: Recibe puntero a tesoro y las coordenadas X Y Z están en rango.
-		* Post: Saca ese tesoro de la celda segun coordenadas y devuelve true si lo saco. 
+		* Post: Saca ese tesoro de la celda segun coordenadas y devuelve true si lo saco.
 		*/
 		bool sacarUnTesoro(Tesoro* ptrTesoro, unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
 			if (this->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ)->sacarTesoro(ptrTesoro) != NULL){
@@ -251,7 +249,7 @@ class Tablero {
 
 		/*
 		* Pre: Recibe puntero a tesoro y las coordenadas X Y Z están en rango.
-		* Post: Pone ese tesoro de la celda segun coordenadas y devuelve true si lo puso. 
+		* Post: Pone ese tesoro de la celda segun coordenadas y devuelve true si lo puso.
 		*/
 		bool ponerTesoro(Tesoro* ptrTesoro, unsigned int coordenadaX, unsigned int coordenadaY, unsigned int coordenadaZ){
 			Celda* ptrCelda = this->obtenerPtrCelda(coordenadaX, coordenadaY, coordenadaZ);
@@ -269,20 +267,20 @@ class Tablero {
 		void moverTesoro(Jugador *ptrJugador){
 			Tesoro* ptrTesoro = this->obtenerUnTesoro(ptrJugador);
 			if (ptrTesoro != NULL){
-				cout << "Jugador "<< ptrJugador->getId()<<": Tiene tesoro en: " << ptrTesoro->getCoordenadaX() << "-"<< ptrTesoro->getCoordenadaY() <<"-"<< ptrTesoro->getCoordenadaZ() << endl;
+      std::cout << "Jugador "<< ptrJugador->getId()<<": Tiene tesoro en: " << ptrTesoro->getCoordenadaX() << "-"<< ptrTesoro->getCoordenadaY() <<"-"<< ptrTesoro->getCoordenadaZ() << std::endl;
 				unsigned int nuevaCoordenadaX; unsigned int nuevaCoordenadaY; unsigned int nuevaCoordenadaZ;
-				cout << "Jugador "<< ptrJugador->getId()<< ": Ingrese nueva coordenadaZ: "; cin >> nuevaCoordenadaZ;
+        std::cout << "Jugador "<< ptrJugador->getId()<< ": Ingrese nueva coordenadaZ: "; std::cin >> nuevaCoordenadaZ;
 				this->mostrarPiso(nuevaCoordenadaZ);
-				cout << "Jugador "<< ptrJugador->getId() << ": Ingrese nueva coordenadaX: "; cin >> nuevaCoordenadaX;
-				cout << "Jugador "<< ptrJugador->getId() << ": Ingrese nueva coordenadaY: "; cin >> nuevaCoordenadaY;
+        std::cout << "Jugador "<< ptrJugador->getId() << ": Ingrese nueva coordenadaX: "; std::cin >> nuevaCoordenadaX;
+        std::cout << "Jugador "<< ptrJugador->getId() << ": Ingrese nueva coordenadaY: "; std::cin >> nuevaCoordenadaY;
 				Celda* ptrNuevaCelda = this->obtenerPtrCelda(nuevaCoordenadaX, nuevaCoordenadaY, nuevaCoordenadaZ);
 				if (ptrNuevaCelda->getEstado() == CELDA_ACTIVA){
 					ptrTesoro->actualizarCoordenadas(nuevaCoordenadaX, nuevaCoordenadaY, nuevaCoordenadaZ);
 					ptrNuevaCelda->addTesoro(ptrTesoro);
-					cout << "El tesoro fue movido" << endl;
+          std::cout << "El tesoro fue movido" << std::endl;
 				}
 				else{
-					cout << "tesoro NO se movio"<< endl;
+          std::cout << "tesoro NO se movio"<< std::endl;
 				}
 			}
 		}
@@ -307,10 +305,10 @@ class Tablero {
 			}
 			this->ptrJugadorActual = ptrNuevoJugador;
 		}
-		
+
 		/*
 		* Pre: -
-		* Post: Libera el contenido de Tablero. 
+		* Post: Libera el contenido de Tablero.
 		*/
         ~Tablero(){
 			Lista<Lista<Lista<Celda*>*>*>*   ptrlistptrlistptrlistdeptrcelda = this->ptrContenido;

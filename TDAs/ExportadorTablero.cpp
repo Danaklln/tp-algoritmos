@@ -9,9 +9,9 @@
 #include <sstream>
 
 template <typename T>
-string NumberToString(T pNumber)
+std::string NumberToString(T pNumber)
 {
- ostringstream oOStrStream;
+  std::ostringstream oOStrStream;
  oOStrStream << pNumber;
  return oOStrStream.str();
 }
