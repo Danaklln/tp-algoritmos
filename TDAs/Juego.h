@@ -283,7 +283,7 @@ class Juego{
 		* Post: saca nueva carta del mazo y decide si guardar o jugar.
 		*/
 		void accionarCarta(Jugador* ptrJugador){
-			string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Tesoro en Peligro","Triple Mina"};
+			string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Triple Espia","Triple Mina"};
 
 			ManoIndividual* manoJugador = ptrJugador->getManoJugador();
 			manoJugador->sacarCarta();
