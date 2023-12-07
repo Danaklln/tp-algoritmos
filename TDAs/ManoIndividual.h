@@ -75,6 +75,13 @@ public:
         }
     }
 
+    /**
+     * pre: Se debe haber sacado al menos una carta antes.
+    * post: muestra por consola la ultima carta sacada.
+    */
+    void printCartaSacada(){
+    	std::cout << "La carta sacada es: " << this->cartaSacada << std::endl;
+    }
 
     void verificarCarta(Carta * carta){
         if(carta == NULL){

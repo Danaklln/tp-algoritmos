@@ -218,10 +218,13 @@ class Juego{
 		* Post: saca nueva carta del mazo y decide si guardar o jugar.
 		*/
 		void accionarCarta(Jugador* ptrJugador){
+			string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Tesoro en Peligro","Triple Mina"};
+
 			ManoIndividual* manoJugador = ptrJugador->getManoJugador();
 			manoJugador->sacarCarta();
+			manoJugador->printCartaSacada();
 			unsigned int jugarOGuardar;
-			cout << "ingrese Guardar la carta 0, Jugar la carta 1" << endl;
+			cout << "ingrese 0 para jugar la carta / 1 Guardar la carta" << endl;
 			cin >> jugarOGuardar;
 			switch (jugarOGuardar){
 			case 0:
@@ -231,6 +234,9 @@ class Juego{
 				manoJugador->guardarCarta();
 				manoJugador->printCartasGuardadas();
 				unsigned int tipoJugar;
+				for(int i = 0; i < 6; i++){
+					cout << nombresCartas[i] << " - " << i << endl;
+				}
 				cout << "ingrese TIPO carta del 0 al 5 :" << endl;
 				cin >> tipoJugar;
 				Carta* carta =  manoJugador->getCarta(tipoJugar);
