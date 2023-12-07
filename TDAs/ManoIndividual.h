@@ -62,6 +62,10 @@ public:
         return false;
     }
 
+    /**
+    * pre: tipo de cartas debe existir
+    * post: devuelve si la carta con ese tipo está en el mazo
+    */
     bool verificarCartaEnMazo(TipoDeCarta tipo){
         this->cartasGuardadas->iniciarCursor();
         while(this->cartasGuardadas->avanzarCursor()){
@@ -94,12 +98,20 @@ public:
     	std::cout << "La carta sacada es: " << nombresCartas[this->cartaSacada->getTipoDeCarta()] << std::endl;
     }
 
+    /**
+    * pre: -
+    * post: verifica que la carta no sea nula
+    */
     void verificarCarta(Carta * carta){
         if(carta == NULL){
             throw "la carta no puede ser Nula";
         }
     }
 
+    /**
+    * pre: el numero debe ser mayor o igual a 0 y menor o igual a 5
+    * post: devuelve la carta 
+    */
     Carta * getCarta(unsigned int numero){
         if(numero < 0 && numero > 5){
             throw "el numero no puede ser mayor a 5";
@@ -113,6 +125,10 @@ public:
         return 0;
     }
 
+    /**
+    * pre: -
+    * post: devuelve la carta sacada
+    */
     Carta * getCartaSacada(){
         return this->cartaSacada;
     }
