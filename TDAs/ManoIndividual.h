@@ -80,7 +80,8 @@ public:
     * post: muestra por consola la ultima carta sacada.
     */
     void printCartaSacada(){
-    	std::cout << "La carta sacada es: " << this->cartaSacada << std::endl;
+    	std::string nombresCartas[6]={"Blindaje","Radar","Partir Tesoro","Romper Blindaje","Tesoro en Peligro","Triple Mina"};
+    	std::cout << "La carta sacada es: " << nombresCartas[this->cartaSacada->getTipoDeCarta()] << std::endl;
     }
 
     void verificarCarta(Carta * carta){
