@@ -4,10 +4,18 @@
 using namespace std;
 
 int main() {
-  unsigned int cantidadDeJugadores = 2, dimensionX = 3, dimensionY = 3, dimensionZ = 2, numeroDeTesorosPorJugador = 3;
-  cout << "Bienvenido a TesoroBinario, para empezar a jugar especifique las dimensiones del tablero (ancho largo alto): " << endl;
-  cin >> dimensionX >> dimensionY >> dimensionZ;
-  cout << "Ingrese la cantidad de jugadores" << endl;
+  bool condicion = false;
+  unsigned int cantidadDeJugadores = 2, dimensionX = 3, dimensionY = 3, dimensionZ = 3, numeroDeTesorosPorJugador = 3;
+  cout << "Bienvenido a TesoroBinario, para empezar a jugar especifique las dimensiones del tablero mayores o iguales a 3 (ancho largo alto): " << endl;
+  while(!condicion){
+    cin >> dimensionX >> dimensionY >> dimensionZ;
+    if(dimensionX >= 3 || dimensionY >= 3  || dimensionZ >= 3){
+        condicion = true;
+    }
+    else{
+        cout << "dimensiones invalidas, para empezar a jugar especifique las dimensiones del tablero mayores o iguales a 3 (ancho largo alto): " << endl;
+    }
+  }
   cin >> cantidadDeJugadores;
   Juego* ptrjuego = new Juego(cantidadDeJugadores, dimensionX, dimensionY, dimensionZ);
   ptrjuego->iniciarJuego(numeroDeTesorosPorJugador);
