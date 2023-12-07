@@ -16,6 +16,7 @@ int main() {
         cout << "dimensiones invalidas, para empezar a jugar especifique las dimensiones del tablero mayores o iguales a 3 (ancho largo alto): " << endl;
     }
   }
+  cout << "Ingrese la cantidad de jugadores" << endl;
   cin >> cantidadDeJugadores;
   Juego* ptrjuego = new Juego(cantidadDeJugadores, dimensionX, dimensionY, dimensionZ);
   ptrjuego->iniciarJuego(numeroDeTesorosPorJugador);
