@@ -234,6 +234,9 @@ class Juego{
 						this->ptrtablero->obtenerPtrCelda(coordenadaX, coordenadaY+1, coordenadaZ)->obtenerTesoroContrario(ptrJugador)->setVisibilidad(TESORO_REVELADO);
 					}
 					this->imagen->exportarTablero(this->ptrtablero, ptrJugador);
+					int aux;
+					cout << "Ingrese cualquier caracter para continuar: ";
+					cin >> aux;
 					break;
 				case 2:
 					this->ponerUnTesoroInicial(ptrJugador, 5);
